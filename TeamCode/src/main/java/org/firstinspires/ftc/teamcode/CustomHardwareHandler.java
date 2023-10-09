@@ -139,4 +139,27 @@ public class CustomHardwareHandler {
     }
     // Other methods for controlling the motors, setting power, etc.
     // ...
+    public void moveServo(double speed) {
+        double currentPosition = 0.0;
+        servo.setPosition(currentPosition)
+        if (gamepad1.a) {
+            double targetPosition = 1.0;
+
+            if (currentPosition < targetPosition)
+                currentPosition += speed;
+            else if (currentPosition > targetPosition) {
+                currentPosition -= speed;
+
+
+                servo.setPosition(currentPosition);
+
+                timer.reset();
+
+            }
+            sleep(milliseconds 50);
+        }
+    }
+
 }
+
+
