@@ -122,8 +122,7 @@ public class CustomHardwareHandler {
             leftRear.setPower(0);
             rightFront.setPower(0);
             rightRear.setPower(0);
-        }
-        else {
+        } else {
             leftFront.setPower((-d + r + s) / total * speed * VLF);
             leftRear.setPower((-d + r - s) / total * speed * VLR); // test to change these values
             rightFront.setPower((-d - r - s) / total * speed * VRF);
@@ -137,6 +136,7 @@ public class CustomHardwareHandler {
              */
         }
     }
+
     // Other methods for controlling the motors, setting power, etc.
     // ...
     public void moveServo(double speed) {
@@ -160,6 +160,29 @@ public class CustomHardwareHandler {
         }
     }
 
+
+
+
+public void moveServo(double speed) {
+
+    double currentPosition = 0.0;
+    railLaunch.setPosition(currentPosition)
+    if (gamepad1.a) {
+        double targetPosition = 1.0;
+
+        if (currentPosition < targetPosition) {
+
+            currentPosition += speed;}
+        else if (currentPosition > targetPosition{
+                currentPosition -= speed;
+
+
+                railLaunch.setPosition(currentPosition);
+
+                timer.reset();
+
+                sleep(milliseconds 50);
+
+        }
+    }
 }
-
-
