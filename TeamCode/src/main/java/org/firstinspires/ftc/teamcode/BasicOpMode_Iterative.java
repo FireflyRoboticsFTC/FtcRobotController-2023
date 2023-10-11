@@ -10,23 +10,19 @@ public class BasicOpMode_Iterative extends OpMode {
     @Override
     public void init() {
         telemetry.addData("Status","Initialized");
-        //customHardwareHandler = hardwareMap hardwarehandler;
+        customHardwareHandler = new CustomHardwareHandler(hardwareMap);
     }
 
     @Override
     public void loop() {
-        //axial = -gamepad1.left_stick_x;
-        //lateral = gamepad1.left_stick_y;
-        //yaw = gamepad1.right_stick_x;
+        double c = 0.65;
+        if (gamepad1.x) c = 0.2;
+        double f = gamepad1.left_stick_y;
+        double r = gamepad1.right_stick_x * 0.5 / 0.65;
+        double s = gamepad1.left_stick_x;
+        double speed = Math.max(Math.max(f * f, r * r), s * s) * c;
+        customHardwareHandler.moveWithPower(f,r,s,speed);
 
-        //backLeftPower = Range.clip(axial-lateral+yaw, -1.0, 1.0);
-        //backRightPower = Range.clip(axial+lateral-yaw, -1.0, 1.0);
-        //frontRightPower = Range.clip(axial-lateral-yaw, -1.0, 1.0);
-        //frontLeftPower = Range.clip(axial+lateral+yaw, -1.0, 1.0);
 
-        //backLeft.setPower(backLeftPower);
-        //backRight.setPower(backRightPower);
-        //frontLeft.set(frontLeftPower);
-        //frontRight.set(frontRightPower);
     }
 }

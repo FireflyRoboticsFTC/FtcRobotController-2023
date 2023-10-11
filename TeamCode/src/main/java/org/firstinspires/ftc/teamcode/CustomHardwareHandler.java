@@ -33,22 +33,26 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class CustomHardwareHandler {
 
+    private final HardwareMap hardwareMap;
     // Define your motors here
-    private DcMotor leftFront;
-    private DcMotor leftRear;
-    private DcMotor rightFront;
-    private DcMotor rightRear;
-    private DcMotor linearSlideRight;
-    private DcMotor linearSlideLeft;
-    private DcMotor actuatorLeft;
-    private DcMotor actuatorRight;
+    private final DcMotor leftFront;
+    private final DcMotor leftRear;
+    private final DcMotor rightFront;
+    private final DcMotor rightRear;
+    private final DcMotor linearSlideRight;
+    private final DcMotor linearSlideLeft;
+    private final DcMotor actuatorLeft;
+    private final DcMotor actuatorRight;
 
     // Define your servo variables
-    private Servo railLaunch;
-    private Servo outputDoor;
-    private Servo conveyorBelt;
-    private Servo intake;
+    private final Servo railLaunch;
+    private final Servo outputDoor;
+    private final Servo conveyorBelt;
+    private final Servo intake;
 
+    private DcMotor.RunMode currRunMode;
+
+    public static double VLF = 1, VLR = 1, VRF = 1, VRR = 1; //wheel difference variables
     private double axial;
 
     private double yaw;
@@ -65,6 +69,7 @@ public class CustomHardwareHandler {
 
     // Constructor
     public CustomHardwareHandler(HardwareMap hardwareMap) {
+        this.hardwareMap = hardwareMap;
         // Initialize your motors by retrieving them from the hardware map
         leftFront = hardwareMap.dcMotor.get("leftFront");
         leftRear = hardwareMap.dcMotor.get("leftRear");
@@ -106,6 +111,78 @@ public class CustomHardwareHandler {
         // ...
     }
 
+    public void moveWithPower(double d, double r, double s, double speed) { // d : linear movement, r : rotational movement, s : speed (0-1); r is signed with CCW as positive
+        //assert (speed <= 1 && speed >= 0): "Speed must be between 0 and 1";
+        if (currRunMode != DcMotor.RunMode.RUN_WITHOUT_ENCODER)
+            currRunMode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
+        speed = Math.abs(speed);
+        double total = Math.abs(d) + Math.abs(r) + Math.abs(s);
+        if (d == 0 && r == 0 && s == 0) {
+            leftFront.setPower(0);
+            leftRear.setPower(0);
+            rightFront.setPower(0);
+            rightRear.setPower(0);
+        } else {
+            leftFront.setPower((-d + r + s) / total * speed * VLF);
+            leftRear.setPower((-d + r - s) / total * speed * VLR); // test to change these values
+            rightFront.setPower((-d - r - s) / total * speed * VRF);
+            rightRear.setPower((-d - r + s) / total * speed * VRR);
+
+            /*
+            d + r + s
+            d + r - s
+            d - r - s
+            d - r + s
+             */
+        }
+    }
+
     // Other methods for controlling the motors, setting power, etc.
     // ...
+    public void moveServo(double speed) {
+        double currentPosition = 0.0;
+        servo.setPosition(currentPosition)
+        if (gamepad1.a) {
+            double targetPosition = 1.0;
+
+            if (currentPosition < targetPosition)
+                currentPosition += speed;
+            else if (currentPosition > targetPosition) {
+                currentPosition -= speed;
+
+
+                servo.setPosition(currentPosition);
+
+                timer.reset();
+
+            }
+            sleep(milliseconds 50);
+        }
+    }
+
+
+
+
+public void moveServo(double speed) {
+
+    double currentPosition = 0.0;
+    railLaunch.setPosition(currentPosition)
+    if (gamepad1.a) {
+        double targetPosition = 1.0;
+
+        if (currentPosition < targetPosition) {
+
+            currentPosition += speed;}
+        else if (currentPosition > targetPosition{
+                currentPosition -= speed;
+
+
+                railLaunch.setPosition(currentPosition);
+
+                timer.reset();
+
+                sleep(milliseconds 50);
+
+        }
+    }
 }
