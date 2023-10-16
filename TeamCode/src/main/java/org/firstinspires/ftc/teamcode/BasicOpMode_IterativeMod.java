@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-public class BasicOpMode_Iterative extends OpMode {
+@TeleOp(name = "TestOpMode",group = "OpModes")
+
+public class BasicOpMode_IterativeMod extends OpMode {
 
     private CustomHardwareHandler customHardwareHandler;
 
