@@ -23,6 +23,12 @@ android {
 
     compileSdkVersion 29
 
+    allprojects {
+        tasks.withType(JavaCompile) {
+            options.deprecation = true
+        }
+    }
+
     signingConfigs {
         release {
             def apkStoreFile = System.getenv("APK_SIGNING_STORE_FILE")
@@ -54,7 +60,7 @@ android {
     defaultConfig {
         signingConfig signingConfigs.debug
         applicationId 'com.qualcomm.ftcrobotcontroller'
-        minSdkVersion 23
+        minSdkVersion 24
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
 

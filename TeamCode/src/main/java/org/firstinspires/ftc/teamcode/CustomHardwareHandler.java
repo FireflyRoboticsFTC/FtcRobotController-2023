@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-//import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -26,10 +26,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class CustomHardwareHandler {
 
@@ -139,50 +135,52 @@ public class CustomHardwareHandler {
 
     // Other methods for controlling the motors, setting power, etc.
     // ...
-    public void moveServo(double speed) {
-        double currentPosition = 0.0;
-        servo.setPosition(currentPosition)
-        if (gamepad1.a) {
-            double targetPosition = 1.0;
+//    public void moveServo(double speed) {
+//        double currentPosition = 0.0;
+//        servo.setPosition(currentPosition);
+//        if (gamepad1.a) {
+//            double targetPosition = 1.0;
+//
+//            if (currentPosition < targetPosition)
+//                currentPosition += speed;
+//            else if (currentPosition > targetPosition) {
+//                currentPosition -= speed;
+//
+//
+//                servo.setPosition(currentPosition);
+//
+//                timer.reset();
+//
+//            }
+//            sleep(milliseconds 50);
+//        }
+//    }
 
-            if (currentPosition < targetPosition)
-                currentPosition += speed;
-            else if (currentPosition > targetPosition) {
-                currentPosition -= speed;
-
-
-                servo.setPosition(currentPosition);
-
-                timer.reset();
-
-            }
-            sleep(milliseconds 50);
-        }
+    public void railLauncher(double setPosition) {
+        railLaunch.setPosition(setPosition);
     }
 
 
-
-
-public void moveServo(double speed) {
-
-    double currentPosition = 0.0;
-    railLaunch.setPosition(currentPosition)
-    if (gamepad1.a) {
-        double targetPosition = 1.0;
-
-        if (currentPosition < targetPosition) {
-
-            currentPosition += speed;}
-        else if (currentPosition > targetPosition{
-                currentPosition -= speed;
-
-
-                railLaunch.setPosition(currentPosition);
-
-                timer.reset();
-
-                sleep(milliseconds 50);
-
-        }
-    }
+//public void moveServo(double speed) {
+//
+//    double currentPosition = 0.0;
+//    railLaunch.setPosition(currentPosition);
+//    if (gamepad1.a) {
+//        double targetPosition = 1.0;
+//
+//        if (currentPosition < targetPosition) {
+//
+//            currentPosition += speed;}
+//        else if (currentPosition > targetPosition{
+//                currentPosition -= speed;
+//
+//
+//                railLaunch.setPosition(currentPosition);
+//
+//                timer.reset();
+//
+//                sleep(milliseconds 50);
+//
+//        }
+//    }
 }
