@@ -46,6 +46,10 @@ public class CustomHardwareHandler {
     private final Servo conveyorBelt;
     private final Servo intake;
 
+    private final Servo intakeRight;
+
+    private final Servo intakeLeft;
+
     private DcMotor.RunMode currRunMode;
 
     public static double VLF = 1, VLR = 1, VRF = 1, VRR = 1; //wheel difference variables
@@ -158,6 +162,11 @@ public class CustomHardwareHandler {
 
     public void railLauncher(double setPosition) {
         railLaunch.setPosition(setPosition);
+    }
+
+    public void parallelInput(double setInput){
+        intakeLeft.setPosition(setInput);
+        intakeRight.setPosition(1/setInput);
     }
 
     public void dispenseOutput() {

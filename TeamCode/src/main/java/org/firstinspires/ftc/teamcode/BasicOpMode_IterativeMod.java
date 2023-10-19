@@ -32,6 +32,8 @@ public class BasicOpMode_IterativeMod extends OpMode {
         if (gamepad1.b) {
             customHardwareHandler.railLauncher(0);
         }
-
+        if (gamepad1.x) {
+            customHardwareHandler.parallelInput(0);
+        }
     }
 }
