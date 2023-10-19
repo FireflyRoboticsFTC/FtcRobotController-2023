@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.acmerobotics.dashboard.config.Config;
+//import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -35,20 +35,20 @@ public class CustomHardwareHandler {
     private final DcMotor leftRear;
     private final DcMotor rightFront;
     private final DcMotor rightRear;
-    private final DcMotor linearSlideRight;
-    private final DcMotor linearSlideLeft;
-    private final DcMotor actuatorLeft;
-    private final DcMotor actuatorRight;
+//    private final DcMotor linearSlideRight;
+//    private final DcMotor linearSlideLeft;
+//    private final DcMotor actuatorLeft;
+//    private final DcMotor actuatorRight;
 
     // Define your servo variables
-    private final Servo railLaunch;
-    private final Servo outputDoor;
-    private final Servo conveyorBelt;
-    private final Servo intake;
+//    private final Servo railLaunch;
+//    private final Servo outputDoor;
+//    private final Servo conveyorBelt;
+//    private final Servo intake;
 
-    private final Servo intakeRight;
-
-    private final Servo intakeLeft;
+//    private final Servo intakeRight;
+//
+//    private final Servo intakeLeft;
 
     private DcMotor.RunMode currRunMode;
 
@@ -75,31 +75,33 @@ public class CustomHardwareHandler {
         leftRear = hardwareMap.dcMotor.get("leftRear");
         rightFront = hardwareMap.dcMotor.get("rightFront");
         rightRear = hardwareMap.dcMotor.get("rightRear");
-        linearSlideRight = hardwareMap.dcMotor.get("linearSlideRight");
-        linearSlideLeft = hardwareMap.dcMotor.get("linearSlideLeft");
-        actuatorLeft = hardwareMap.dcMotor.get("actuatorLeft");
-        actuatorRight = hardwareMap.dcMotor.get("actuatorRight");
+//        linearSlideRight = hardwareMap.dcMotor.get("linearSlideRight");
+//        linearSlideLeft = hardwareMap.dcMotor.get("linearSlideLeft");
+//        actuatorLeft = hardwareMap.dcMotor.get("actuatorLeft");
+//        actuatorRight = hardwareMap.dcMotor.get("actuatorRight");
 
-        railLaunch = hardwareMap.servo.get("railLaunch");
-        outputDoor = hardwareMap.servo.get("outputDoor");
-        conveyorBelt = hardwareMap.servo.get("conveyorBelt");
-        intake = hardwareMap.servo.get("intake");
+//        intakeLeft = hardwareMap.servo.get("intakeLeft");
+//        intakeRight = hardwareMap.servo.get("intakeRight");
+//        railLaunch = hardwareMap.servo.get("railLaunch");
+//        outputDoor = hardwareMap.servo.get("outputDoor");
+//        conveyorBelt = hardwareMap.servo.get("conveyorBelt");
+//        intake = hardwareMap.servo.get("intake");
 
         // Set the direction for the "left" motors to reverse
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
-        linearSlideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        actuatorLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+//        linearSlideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+//        actuatorLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Set motor run modes to RUN_WITHOUT_ENCODER
         leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        linearSlideRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        linearSlideLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        actuatorLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        actuatorRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        linearSlideRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        linearSlideLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        actuatorLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        actuatorRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Set zero power behavior to BRAKE for front and rear motors
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -122,7 +124,8 @@ public class CustomHardwareHandler {
             leftRear.setPower(0);
             rightFront.setPower(0);
             rightRear.setPower(0);
-        } else {
+        }
+        else {
             leftFront.setPower((-d + r + s) / total * speed * VLF);
             leftRear.setPower((-d + r - s) / total * speed * VLR); // test to change these values
             rightFront.setPower((-d - r - s) / total * speed * VRF);
@@ -159,19 +162,19 @@ public class CustomHardwareHandler {
 //            sleep(milliseconds 50);
 //        }
 //    }
-
-    public void railLauncher(double setPosition) {
-        railLaunch.setPosition(setPosition);
-    }
-
-    public void parallelInput(double setInput){
-        intakeLeft.setPosition(setInput);
-        intakeRight.setPosition(1/setInput);
-    }
-
-    public void dispenseOutput() {
-        outputDoor.setPosition(0.16733333333334);   //dispense angle is 50.2 degrees / 300 degrees total = 0.1673333333333
-    }
+//
+//    public void railLauncher(double setPosition) {
+//        railLaunch.setPosition(setPosition);
+//    }
+//
+//    public void parallelInput(double setInput){
+//        intakeLeft.setPosition(setInput);
+//        intakeRight.setPosition(1/setInput);
+//    }
+//
+//    public void dispenseOutput() {
+//        outputDoor.setPosition(0.16733333333334);   //dispense angle is 50.2 degrees / 300 degrees total = 0.1673333333333
+//    }
 
 
 

@@ -18,22 +18,22 @@ public class BasicOpMode_IterativeMod extends OpMode {
     @Override
     public void loop() {
         double c = 0.65;
-        if (gamepad1.x) c = 0.2;
+
         double f = gamepad1.left_stick_y;
         double r = gamepad1.right_stick_x * 0.5 / 0.65;
         double s = gamepad1.left_stick_x;
         double speed = Math.max(Math.max(f * f, r * r), s * s) * c;
         customHardwareHandler.moveWithPower(f,r,s,speed);
 
-        if (gamepad1.a) {
-            customHardwareHandler.railLauncher(1);
-        }
-
-        if (gamepad1.b) {
-            customHardwareHandler.railLauncher(0);
-        }
-        if (gamepad1.x) {
-            customHardwareHandler.parallelInput(0);
-        }
+//        if (gamepad1.a) {
+//            customHardwareHandler.railLauncher(1);
+//        }
+//
+//        if (gamepad1.b) {
+//            customHardwareHandler.railLauncher(0);
+//        }
+//        if (gamepad1.x) {
+//            customHardwareHandler.parallelInput(0);
+//        }
     }
 }
