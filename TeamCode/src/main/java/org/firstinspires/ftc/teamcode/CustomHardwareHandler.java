@@ -160,6 +160,11 @@ public class CustomHardwareHandler {
         railLaunch.setPosition(setPosition);
     }
 
+    public void dispenseOutput() {
+        outputDoor.setPosition(0.16733333333334);   //dispense angle is 50.2 degrees / 300 degrees total = 0.1673333333333
+    }
+
+
 
 //public void moveServo(double speed) {
 //
