@@ -41,7 +41,7 @@ public class CustomHardwareHandler {
 //    private final DcMotor actuatorRight;
 
     // Define your servo variables
-//    private final Servo railLaunch;
+    private final Servo railLaunch;
 //    private final Servo outputDoor;
 //    private final Servo conveyorBelt;
 //    private final Servo intake;
@@ -82,7 +82,7 @@ public class CustomHardwareHandler {
 
 //        intakeLeft = hardwareMap.servo.get("intakeLeft");
 //        intakeRight = hardwareMap.servo.get("intakeRight");
-//        railLaunch = hardwareMap.servo.get("railLaunch");
+      railLaunch = hardwareMap.servo.get("railLaunch");
 //        outputDoor = hardwareMap.servo.get("outputDoor");
 //        conveyorBelt = hardwareMap.servo.get("conveyorBelt");
 //        intake = hardwareMap.servo.get("intake");
@@ -128,8 +128,8 @@ public class CustomHardwareHandler {
         else {
             leftFront.setPower((-d + r + s) / total * speed * VLF);
             leftRear.setPower((-d + r - s) / total * speed * VLR); // test to change these values
-            rightFront.setPower((-d - r - s) / total * speed * VRF);
-            rightRear.setPower((-d - r + s) / total * speed * VRR);
+            rightFront.setPower((-d - r + s) / total * speed * VRF);
+            rightRear.setPower((-d - r - s) / total * speed * VRR);
 
             /*
             d + r + s
@@ -163,9 +163,9 @@ public class CustomHardwareHandler {
 //        }
 //    }
 //
-//    public void railLauncher(double setPosition) {
-//        railLaunch.setPosition(setPosition);
-//    }
+    public void railLauncher(double setPosition) {
+        railLaunch.setPosition(setPosition);
+    }
 //
 //    public void parallelInput(double setInput){
 //        intakeLeft.setPosition(setInput);
