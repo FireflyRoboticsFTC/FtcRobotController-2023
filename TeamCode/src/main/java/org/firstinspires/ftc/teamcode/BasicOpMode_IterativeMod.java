@@ -25,6 +25,8 @@ public class BasicOpMode_IterativeMod extends OpMode {
         double speed = Math.max(Math.max(f * f, r * r), s * s) * c;
         customHardwareHandler.moveWithPower(f,r,s,speed);
 
+
+
         if (gamepad1.a) {
             customHardwareHandler.railLauncher(1);
         }
@@ -32,8 +34,9 @@ public class BasicOpMode_IterativeMod extends OpMode {
         if (gamepad1.b) {
             customHardwareHandler.railLauncher(0);
         }
-//        if (gamepad1.x) {
-//            customHardwareHandler.parallelInput(0);
-//        }
+
+        if (gamepad2.a) {
+            customHardwareHandler.intakeAndTransfers(1);
+        }
     }
 }

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 //import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -43,12 +44,11 @@ public class CustomHardwareHandler {
     // Define your servo variables
     private final Servo railLaunch;
 //    private final Servo outputDoor;
-//    private final Servo conveyorBelt;
-//    private final Servo intake;
+//    private final DcMotor conveyorBelt;
 
-//    private final Servo intakeRight;
+    private final CRServo intakeFront;
 //
-//    private final Servo intakeLeft;
+    private final CRServo intakeBack;
 
     private DcMotor.RunMode currRunMode;
 
@@ -75,16 +75,17 @@ public class CustomHardwareHandler {
         leftRear = hardwareMap.dcMotor.get("leftRear");
         rightFront = hardwareMap.dcMotor.get("rightFront");
         rightRear = hardwareMap.dcMotor.get("rightRear");
+//        conveyorBelt = hardwareMap.dcMotor.get("conveyorBelt");
 //        linearSlideRight = hardwareMap.dcMotor.get("linearSlideRight");
 //        linearSlideLeft = hardwareMap.dcMotor.get("linearSlideLeft");
 //        actuatorLeft = hardwareMap.dcMotor.get("actuatorLeft");
 //        actuatorRight = hardwareMap.dcMotor.get("actuatorRight");
 
-//        intakeLeft = hardwareMap.servo.get("intakeLeft");
-//        intakeRight = hardwareMap.servo.get("intakeRight");
-      railLaunch = hardwareMap.servo.get("railLaunch");
+        intakeFront = hardwareMap.crservo.get("intakeFront");
+        intakeBack = hardwareMap.crservo.get("intakeBack");
+        railLaunch = hardwareMap.servo.get("railLaunch");
 //        outputDoor = hardwareMap.servo.get("outputDoor");
-//        conveyorBelt = hardwareMap.servo.get("conveyorBelt");
+
 //        intake = hardwareMap.servo.get("intake");
 
         // Set the direction for the "left" motors to reverse
@@ -138,6 +139,13 @@ public class CustomHardwareHandler {
             d - r + s
              */
         }
+    }
+
+    public void intakeAndTransfers(double j) {
+        double conveyerRatio = 1;
+        intakeFront.setPower(j);
+        intakeBack.setPower(j);
+//        conveyorBelt.setPower(j*conveyerRatio);
     }
 
     // Other methods for controlling the motors, setting power, etc.
