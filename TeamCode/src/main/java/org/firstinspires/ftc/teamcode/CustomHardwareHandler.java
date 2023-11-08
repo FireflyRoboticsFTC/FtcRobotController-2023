@@ -143,8 +143,8 @@ public class CustomHardwareHandler {
 
     public void intakeAndTransfers(double j) {
         double conveyerRatio = 1;
-        intakeFront.setPower(j);
-        intakeBack.setPower(j);
+        intakeFront.setPower(-j);
+        intakeBack.setPower(-j);
 //        conveyorBelt.setPower(j*conveyerRatio);
     }
 

@@ -38,5 +38,9 @@ public class BasicOpMode_IterativeMod extends OpMode {
         if (gamepad2.a) {
             customHardwareHandler.intakeAndTransfers(1);
         }
+
+        if(gamepad2.b) {
+            customHardwareHandler.intakeAndTransfers(-1);
+        }
     }
 }
