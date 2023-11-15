@@ -1,3 +1,4 @@
+
 package org.firstinspires.ftc.teamcode.drive;
 
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MAX_ACCEL;
@@ -49,9 +50,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 /*
  * Simple mecanum drive hardware implementation for REV hardware.
  */
+
 @Config
 public class SampleMecanumDrive extends MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
@@ -129,7 +132,7 @@ public class SampleMecanumDrive extends MecanumDrive {
 
         // TODO: if desired, use setLocalizer() to change the localization method
         // setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap, lastTrackingEncPositions, lastTrackingEncVels));
-        setLocalizer(new StandardTrackingWheelLocalizer(customHardwareMap));
+       // setLocalizer(new StandardTrackingWheelLocalizer(customHardwareMap));
 
         trajectorySequenceRunner = new TrajectorySequenceRunner(
                 follower, HEADING_PID, batteryVoltageSensor,
@@ -310,3 +313,4 @@ public class SampleMecanumDrive extends MecanumDrive {
         return new ProfileAccelerationConstraint(maxAccel);
     }
 }
+
