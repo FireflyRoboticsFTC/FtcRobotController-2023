@@ -18,7 +18,7 @@ import java.util.List;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
  */
-@TeleOp(name = "Concept: TensorFlow Object Detection", group = "Concept")
+@TeleOp(name = "TensorFlow Object Detection", group = "Vision")
 public class TensorFlowObjectDetection extends LinearOpMode {
 
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
@@ -28,7 +28,7 @@ public class TensorFlowObjectDetection extends LinearOpMode {
      */
     private TfodProcessor tfod;
 
-    private static final String TFOD_MODEL_ASSET = "model_2023.tflite";
+    private static final String TFOD_MODEL_ASSET = "Cone.tflite";
 
     // Define the labels recognized in the model for TFOD (must be in training order!)
     private static final String[] LABELS = {
