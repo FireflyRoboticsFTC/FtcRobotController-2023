@@ -46,7 +46,7 @@ public class HardwareHandler {
 
     // Define your servo variables
     private final Servo railLaunch;
- //   private final Servo outputDoor;
+    private final Servo outputDoor;
     private final DcMotor conveyorBelt;
 
 
@@ -92,7 +92,7 @@ public class HardwareHandler {
         intakeBack = hardwareMap.crservo.get("intakeBack");
         railLaunch = hardwareMap.servo.get("railLaunch");
         drop = hardwareMap.servo.get("BAM");
-//        outputDoor = hardwareMap.servo.get("outputDoor");
+        outputDoor = hardwareMap.servo.get("outputDoor");
 
 //        intake = hardwareMap.servo.get("intake");
 
@@ -184,12 +184,12 @@ public class HardwareHandler {
         boolean isButtonPressed = a; // Change "a" to the desired button
         double rightPowerModifer = 1;
         if (power > 0)
-            rightPowerModifer = 1;
+            rightPowerModifer = 0.8;
         // Check if the button state has changed
         if (isButtonPressed && !buttonPressed) {
             // Button is pressed, start the motor
-            linearSlideRight.setPower(-power*rightPowerModifer); // Set the motor power to your desired value
-            linearSlideLeft.setPower(power);
+            linearSlideRight.setPower(power*rightPowerModifer); // Set the motor power to your desired value
+            linearSlideLeft.setPower(-power);
             runtime.reset(); // Reset the timer
 
         } else if (!isButtonPressed && buttonPressed) {
@@ -237,11 +237,26 @@ public class HardwareHandler {
 //        intakeRight.setPosition(1/setInput);
 //    }
 //
-//    public void dispenseOutput() {
-//        outputDoor.setPosition(0.16733333333334);   //dispense angle is 50.2 degrees / 300 degrees total = 0.1673333333333
-//    }
+    boolean outputButton = false;
+    long outputLastPressed = 0;
+    public void dispenseOutput() {
+        if (System.currentTimeMillis() - outputLastPressed > 500) {
+            outputLastPressed = System.currentTimeMillis();
+            outputButton = ! outputButton;
+            outputDoor.setPosition(outputButton ? 0.16733333333334 : 0);
+        }
+        //dispense angle is 50.2 degrees / 300 degrees total = 0.1673333333333
+    }
 
-
+    boolean slowButton = false;
+    long slowLastPressed = 0;
+    public boolean toggleSlow() {
+        if (System.currentTimeMillis() - slowLastPressed > 500) {
+            slowLastPressed = System.currentTimeMillis();
+            slowButton = !slowButton;
+        }
+        return slowButton;
+    }
 
 //public void moveServo(double speed) {
 //

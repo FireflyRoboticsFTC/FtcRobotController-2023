@@ -10,56 +10,73 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 
 public class BasicOpMode_IterativeMod extends OpMode {
 
-    private HardwareHandler customHardwareHandler;
+    private HardwareHandler HardwareHandler;
+
+    private boolean toggleSlow;
 
     @Override
     public void init() {
         telemetry.addData("Status", "Initialized");
-        customHardwareHandler = new HardwareHandler(hardwareMap, new Position(), telemetry);
-
+        HardwareHandler = new HardwareHandler(hardwareMap, new Position(), telemetry);
+        toggleSlow = false;
     }
 
     @Override
     public void loop() {
         double c = 0.65;
-
         double f = gamepad1.left_stick_y;
         double r = gamepad1.right_stick_x * 0.5 / 0.65;
         double s = gamepad1.left_stick_x;
         double speed = Math.max(Math.max(f * f, r * r), s * s) * c;
-        customHardwareHandler.moveWithPower(f, r, s, speed);
-        boolean a = gamepad1.x;
-        boolean b = gamepad1.y;
-        customHardwareHandler.toggleSlide(a,1.0);
-        customHardwareHandler.toggleSlide(b,-0.1);
 
-
-
-        if (gamepad1.a) {
-            customHardwareHandler.railLauncher(1);
+        if (gamepad1.x) {
+            toggleSlow = HardwareHandler.toggleSlow();
         }
 
+        if (toggleSlow) {
+            speed *= 0.25;
+        }
+
+        HardwareHandler.moveWithPower(f, r, s, speed);
+
+        boolean a = gamepad2.dpad_up;
+        boolean b = gamepad2.dpad_down;
+        HardwareHandler.toggleSlide(a,1.0);
+        HardwareHandler.toggleSlide(b,-0.75);
+
+//        double p = -gamepad2.left_stick_y;
+//        HardwareHandler.moveConveyorBelt(p);
+
         if (gamepad1.b) {
-            customHardwareHandler.railLauncher(0);
+            HardwareHandler.dispenseOutput();
         }
 
         if (gamepad2.a) {
-            customHardwareHandler.intakeAndTransfers(1);
+            HardwareHandler.intakeAndTransfers(1);
         }
 
         if (gamepad2.b) {
-            customHardwareHandler.intakeAndTransfers(-1);
+            HardwareHandler.intakeAndTransfers(-1);
+        }
+
+        if(!gamepad2.b && !gamepad2.a) {
+            HardwareHandler.intakeAndTransfers(0);
         }
 
         if (gamepad2.x) {
-            customHardwareHandler.doorRelease(0);
-    }
+            HardwareHandler.doorRelease(0.4);
+        }
 
-        if(gamepad2.y) {
-            customHardwareHandler.doorRelease(1);
-    }
+        if(gamepad2.left_bumper) {
+            HardwareHandler.doorRelease(0.5);
+        }
 
+        if (gamepad2.y) {
+            HardwareHandler.railLauncher(0.4);
+        }
 
-
+        if (gamepad2.right_bumper) {
+            HardwareHandler.railLauncher(1);
+        }
     }
 }
