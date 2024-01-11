@@ -28,7 +28,7 @@ public class TensorFlowObjectDetection extends LinearOpMode {
      */
     private TfodProcessor tfod;
 
-    private static final String TFOD_MODEL_ASSET = "Cone.tflite";
+    private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/CenterStage.tflite";
 
     // Define the labels recognized in the model for TFOD (must be in training order!)
     private static final String[] LABELS = {
@@ -102,7 +102,7 @@ public class TensorFlowObjectDetection extends LinearOpMode {
 
         // Set the camera (webcam vs. built-in RC phone camera).
         if (USE_WEBCAM) {
-            builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"));
+            builder.setCamera(hardwareMap.get(WebcamName.class, "Camera"));
         } else {
             builder.setCamera(BuiltinCameraDirection.BACK);
         }
