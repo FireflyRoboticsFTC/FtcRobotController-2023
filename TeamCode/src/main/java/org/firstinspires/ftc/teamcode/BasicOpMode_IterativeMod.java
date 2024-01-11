@@ -30,9 +30,16 @@ public class BasicOpMode_IterativeMod extends OpMode {
         customHardwareHandler.moveWithPower(f, r, s, speed);
         boolean a = gamepad1.x;
         boolean b = gamepad1.y;
-        customHardwareHandler.toggleSlide(a,1.0);
-        customHardwareHandler.toggleSlide(b,-0.1);
+        customHardwareHandler.toggleSlide(a,-1.0);
+        customHardwareHandler.toggleSlide(b,0.5);
+        boolean d = gamepad2.a;
+        boolean e = gamepad2.b;
 
+        if (gamepad2.a)
+            customHardwareHandler.intakeAndTransfer(1);
+
+        if (gamepad2.b)
+            customHardwareHandler.intakeAndTransfer(-1);
 
 
         if (gamepad1.a) {
@@ -43,13 +50,7 @@ public class BasicOpMode_IterativeMod extends OpMode {
             customHardwareHandler.railLauncher(0);
         }
 
-        if (gamepad2.a) {
-            customHardwareHandler.intakeAndTransfers(1);
-        }
 
-        if (gamepad2.b) {
-            customHardwareHandler.intakeAndTransfers(-1);
-        }
 
         if (gamepad2.x) {
             customHardwareHandler.doorRelease(0);

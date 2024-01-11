@@ -50,9 +50,9 @@ public class HardwareHandler {
     private final DcMotor conveyorBelt;
 
 
-    private final CRServo intakeFront;
+    private final DcMotor intakeFront;
 //
-    private final CRServo intakeBack;
+    //private final DcMotor intakeBack;
 
     private DcMotor.RunMode currRunMode;
 
@@ -88,8 +88,8 @@ public class HardwareHandler {
 //        actuatorLeft = hardwareMap.dcMotor.get("actuatorLeft");
 //        actuatorRight = hardwareMap.dcMotor.get("actuatorRight");
 
-        intakeFront = hardwareMap.crservo.get("intakeFront");
-        intakeBack = hardwareMap.crservo.get("intakeBack");
+        intakeFront = hardwareMap.dcMotor.get("intakeFront");
+        //intakeBack = hardwareMap.crservo.get("intakeBack");
         railLaunch = hardwareMap.servo.get("railLaunch");
         drop = hardwareMap.servo.get("BAM");
 //        outputDoor = hardwareMap.servo.get("outputDoor");
@@ -145,14 +145,15 @@ public class HardwareHandler {
         if (d == 0 && r == 0 && s == 0) {
             leftFront.setPower(0);
             leftRear.setPower(0);
+
             rightFront.setPower(0);
             rightRear.setPower(0);
         }
         else {
             leftFront.setPower((-d + r + s) / total * speed * VLF);
             leftRear.setPower((-d + r - s) / total * speed * VLR); // test to change these values
-            rightFront.setPower((-d - r + s) / total * speed * VRF);
-            rightRear.setPower((-d - r - s) / total * speed * VRR);
+            rightFront.setPower((-d - r - s) / total * speed * VRF);
+            rightRear.setPower((-d - r + s) / total * speed * VRR);
 
             /*
             d + r + s
@@ -163,11 +164,10 @@ public class HardwareHandler {
         }
     }
 
-    public void intakeAndTransfers(double j) {
-        double conveyerRatio = 1;
-        intakeFront.setPower(-j);
-        intakeBack.setPower(-j);
-        conveyorBelt.setPower(j*conveyerRatio);
+    public void intakeAndTransfer(double a) {
+        // Check if the button is pressed
+        intakeFront.setPower(a);
+        conveyorBelt.setPower(a);
     }
 
     public void doorRelease(double release) {
