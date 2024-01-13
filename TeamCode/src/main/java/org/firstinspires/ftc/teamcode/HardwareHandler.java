@@ -36,6 +36,8 @@ public class HardwareHandler {
 
     private Orientation angles;
     private final SimpsonIntegrator integrator;
+
+    private final double kP = 0.01;
     private final DcMotor leftFront;
 
     private Position currPos;
@@ -371,6 +373,15 @@ public class HardwareHandler {
     }
 
 
+    //non-IMU rotation
+    public void rawRotation(double power) {
+        leftFront.setPower(power);
+        leftRear.setPower(power);
+        rightFront.setPower(-power);
+        rightRear.setPower(-power);
+    }
+
+    //IMU ROTATION (MAYBE WORKS?)
     public void rotation(double degrees, LinearOpMode opMode) {
         double currentHeading;
         double initialHeading = 0;
@@ -404,6 +415,29 @@ public class HardwareHandler {
         }
 
     }
+
+    public void strafeLeft(double power) {
+        double heading = getHeading();
+        double correction = heading * kP;
+
+        // Adjust motor powers for strafing left
+        leftFront.setPower(-power + correction);
+        leftRear.setPower(power + correction);
+        rightFront.setPower(power - correction);
+        rightRear.setPower(-power - correction);
+    }
+
+    public void strafeRight(double power) {
+        double heading = getHeading();
+        double correction = heading * kP;
+
+        // Adjust motor powers for strafing left
+        leftFront.setPower(power + correction);
+        leftRear.setPower(-power + correction);
+        rightFront.setPower(-power - correction);
+        rightRear.setPower(power - correction);
+    }
+
 }
 
 

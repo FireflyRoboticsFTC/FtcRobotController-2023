@@ -24,9 +24,14 @@ public class TestAuto extends LinearOpMode {
         waitForStart();
 
         //customHardwareHandler.strafeFourWheel(1,true);
+
+
+        //IMU ROTATION TESTING
         customHardwareHandler.rotation(90,this);
         customHardwareHandler.rotation(-90,this);
         customHardwareHandler.rotation(90,this);
+
+        //customHardwareHandler.rawRotation(1);
 
         sleep(1000);
 
@@ -36,11 +41,18 @@ public class TestAuto extends LinearOpMode {
 
         customHardwareHandler.moveFourWheel(1);
 
-        sleep(1000);  // Sleep for 3000 milliseconds (3 seconds)
+        sleep(1000);
 
-        // Stop the motors
 
         customHardwareHandler.moveFourWheel(0);
+
+        customHardwareHandler.strafeLeft(1);
+
+        sleep(1000);
+
+        customHardwareHandler.strafeRight(1);
+
+        sleep(1000);
 
 
 
