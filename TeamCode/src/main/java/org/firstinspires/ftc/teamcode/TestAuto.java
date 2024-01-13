@@ -1,39 +1,52 @@
-/*
-package org.firstinspires.ftc.teamcode.autos;
 
-import com.acmerobotics.dashboard.FtcDashboard;
-import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
-import com.acmerobotics.roadrunner.geometry.Pose2d;
+package org.firstinspires.ftc.teamcode;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.HardwareHandler;
-import org.openftc.apriltag.AprilTagDetection;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
 
-import java.util.ArrayList;
-
-@Autonomous
-@Config
+@Autonomous(name = "TestAuto", group = "Autonomous")
 public class TestAuto extends LinearOpMode {
 
     private HardwareHandler customHardwareHandler;
-    telemetry = new MultipleTelemetry(telemetry);
+
+
     @Override
-    public void runOpMode()  {
-        HardwareHandler hardwareHandler = new HardwareHandler(hardwareMap, telemetry);
+    public void runOpMode() {
+        // Initialize hardware
+        telemetry.addData("Status", "Initialized");
+        customHardwareHandler = new HardwareHandler(hardwareMap, new Position(), telemetry);
+
+
+
         waitForStart();
 
+        //customHardwareHandler.strafeFourWheel(1,true);
+        customHardwareHandler.rotation(90,this);
+        customHardwareHandler.rotation(-90,this);
+        customHardwareHandler.rotation(90,this);
 
-        sleep(3000);
+        sleep(1000);
+
+        //customHardwareHandler.strafeFourWheel(0,true);
+
+        sleep(1000);
+
+        customHardwareHandler.moveFourWheel(1);
+
+        sleep(1000);  // Sleep for 3000 milliseconds (3 seconds)
+
+        // Stop the motors
+
+        customHardwareHandler.moveFourWheel(0);
 
 
+
+
+
+        // Stop the OpMode
+        stop();
     }
-    }
-*/
-
+}

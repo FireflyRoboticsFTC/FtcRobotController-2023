@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BHI260IMU;
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -9,8 +11,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.teamcode.movement.imu.SimpsonIntegrator;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
 
 import java.util.HashMap;
 
@@ -25,8 +32,9 @@ public class HardwareHandler {
     // Define your motors here
 
     private final int msPollInterval = 100;
-    //private final BNO055IMU imu;
-    private final BHI260IMU imu;
+    private final BNO055IMU imu;
+
+    private Orientation angles;
     private final SimpsonIntegrator integrator;
     private final DcMotor leftFront;
 
@@ -37,6 +45,14 @@ public class HardwareHandler {
     private final DcMotor leftRear;
     private final DcMotor rightFront;
     private final DcMotor rightRear;
+
+    boolean intakeOn = true;
+
+    boolean openDoor = true;
+
+    boolean slowOn = false;
+
+    boolean slowMode = false;
 
     public static double KLF = 1, KLR = 0.95, KRF = 0.9, KRR = 0.855; //KLF = 1, KLR = 0.944, KRF = 0.934825, KRR = 0.8824748;
     private final DcMotor linearSlideRight;
@@ -123,7 +139,13 @@ public class HardwareHandler {
 
 
 
-        imu = hardwareMap.get(BHI260IMU.class, "imu");
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+
+        // Initialize IMU hardware
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        imu.initialize(parameters);
 
 
         //assert(imu.isSystemCalibrated()): "Calibrate the IMU";
@@ -139,8 +161,10 @@ public class HardwareHandler {
     public void moveWithPower(double d, double r, double s, double speed) { // d : linear movement, r : rotational movement, s : speed (0-1); r is signed with CCW as positive
         //assert (speed <= 1 && speed >= 0): "Speed must be between 0 and 1";
         if (currRunMode != DcMotor.RunMode.RUN_WITHOUT_ENCODER)
-            currRunMode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
         speed = Math.abs(speed);
+
+        if (slowMode)
+            speed = speed/2;
         double total = Math.abs(d) + Math.abs(r) + Math.abs(s);
         if (d == 0 && r == 0 && s == 0) {
             leftFront.setPower(0);
@@ -164,15 +188,35 @@ public class HardwareHandler {
         }
     }
 
-    public void intakeAndTransfer(double a) {
+    public void slowMode(double slowPercent) {
+        if (slowOn = true) {
+            slowMode = false;
+            slowOn = false;
+        }
+        if (slowOn = false) {
+            slowMode = true;
+            slowOn = true;
+        }
+    }
+
+/*    public void intakeAndTransfer(double a) {
         // Check if the button is pressed
-        intakeFront.setPower(a);
-        conveyorBelt.setPower(a);
+
+            intakeFront.setPower(a);
+            conveyorBelt.setPower(-a);
     }
 
     public void doorRelease(double release) {
-        drop.setPosition(release);
-    }
+        if (openDoor = true) {
+            drop.setPosition(release);
+            openDoor = false;
+        }
+        if (openDoor = false) {
+            drop.setPosition(-release);
+            openDoor = true;
+        }
+    }*/
+
 
 
 
@@ -236,7 +280,7 @@ public class HardwareHandler {
 //        intakeLeft.setPosition(setInput);
 //        intakeRight.setPosition(1/setInput);
 //    }
-//
+/*//
     boolean outputButton = false;
     long outputLastPressed = 0;
     public void dispenseOutput() {
@@ -256,7 +300,7 @@ public class HardwareHandler {
             slowButton = !slowButton;
         }
         return slowButton;
-    }
+    }*/
 
 //public void moveServo(double speed) {
 //
@@ -288,5 +332,81 @@ public class HardwareHandler {
     }
 
 
+    public void intakeAndTransfer(int i) {
+        intakeFront.setPower(i);
+        conveyorBelt.setPower(-i);
+    }
 
+    public void doorRelease(double release) {
+        drop.setPosition(release);
+    }
+
+
+    public void moveFourWheel(double power) {
+        leftFront.setPower(power);
+        leftRear.setPower(power);
+        rightFront.setPower(power);
+        rightRear.setPower(power);
+    }
+
+    public void strafeFourWheel(double power, boolean direction) {
+        if (direction) {
+            leftFront.setPower(-power);
+            leftRear.setPower(power*0.5);
+            rightFront.setPower(power);
+            rightRear.setPower(-power*0.5);
+        }
+        else {
+            leftFront.setPower(power);
+            leftRear.setPower(-power*0.5);
+            rightFront.setPower(power);
+            rightRear.setPower(-power*0.5 );
+        }
+
+    }
+
+    private double getHeading() {
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        return angles.firstAngle;
+    }
+
+
+    public void rotation(double degrees, LinearOpMode opMode) {
+        double currentHeading;
+        double initialHeading = 0;
+
+
+        while (opMode.opModeIsActive()) {
+
+            currentHeading = getHeading();
+
+            double error = degrees - (currentHeading - initialHeading);
+
+            double rotationPower = error * 0.01; //error constant
+
+
+            leftFront.setPower(rotationPower);
+            leftRear.setPower(rotationPower);
+            rightFront.setPower(-rotationPower);
+            rightRear.setPower(-rotationPower);
+
+
+            if (Math.abs(error) < 1.0) {
+                break;
+            }
+
+            opMode.telemetry.addData("Current Heading", currentHeading);
+            opMode.telemetry.addData("Error", error);
+            opMode.telemetry.update();
+
+            opMode.idle();
+
+        }
+
+    }
 }
+
+
+
+
+
