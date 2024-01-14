@@ -21,6 +21,11 @@ import java.util.List;
 @TeleOp(name = "TensorFlow Object Detection", group = "Vision")
 public class TensorFlowObjectDetection extends LinearOpMode {
 
+
+    //these variables are to store position of images
+    double x;
+    double y;
+
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
 
     /**
@@ -145,8 +150,8 @@ public class TensorFlowObjectDetection extends LinearOpMode {
 
         // Step through the list of recognitions and display info for each one.
         for (Recognition recognition : currentRecognitions) {
-            double x = (recognition.getLeft() + recognition.getRight()) / 2 ;
-            double y = (recognition.getTop()  + recognition.getBottom()) / 2 ;
+             x = (recognition.getLeft() + recognition.getRight()) / 2 ;
+             y = (recognition.getTop()  + recognition.getBottom()) / 2 ;
 
             telemetry.addData(""," ");
             telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100);
@@ -155,5 +160,13 @@ public class TensorFlowObjectDetection extends LinearOpMode {
         }   // end for() loop
 
     }   // end method telemetryTfod()
+
+
+    public double getPositionX(){
+        return x;
+    }
+    public double getPositionY(){
+        return y;
+    }
 
 }   // end class
