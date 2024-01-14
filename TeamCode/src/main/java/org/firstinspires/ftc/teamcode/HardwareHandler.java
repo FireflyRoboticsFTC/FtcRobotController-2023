@@ -32,7 +32,7 @@ public class HardwareHandler {
     // Define your motors here
 
     private final int msPollInterval = 100;
-    private final BNO055IMU imu;
+    //private final BNO055IMU imu;
 
     private Orientation angles;
     private final SimpsonIntegrator integrator;
@@ -146,8 +146,8 @@ public class HardwareHandler {
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
 
         // Initialize IMU hardware
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
-        imu.initialize(parameters);
+        //imu = hardwareMap.get(BNO055IMU.class, "imu");
+        //imu.initialize(parameters);
 
 
         //assert(imu.isSystemCalibrated()): "Calibrate the IMU";
@@ -366,11 +366,12 @@ public class HardwareHandler {
         }
 
     }
-
+    /**
     private double getHeading() {
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         return angles.firstAngle;
     }
+     **/
 
 
     //non-IMU rotation
@@ -380,7 +381,7 @@ public class HardwareHandler {
         rightFront.setPower(-power);
         rightRear.setPower(-power);
     }
-
+/**
     //IMU ROTATION (MAYBE WORKS?)
     public void rotation(double degrees, LinearOpMode opMode) {
         double currentHeading;
@@ -415,7 +416,6 @@ public class HardwareHandler {
         }
 
     }
-
     public void strafeLeft(double power) {
         double heading = getHeading();
         double correction = heading * kP;
@@ -437,6 +437,7 @@ public class HardwareHandler {
         rightFront.setPower(-power - correction);
         rightRear.setPower(power - correction);
     }
+ **/
 
 }
 
