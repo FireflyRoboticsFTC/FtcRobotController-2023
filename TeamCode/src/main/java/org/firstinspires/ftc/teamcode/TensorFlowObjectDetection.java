@@ -1,5 +1,5 @@
 
-package org.firstinspires.ftc.robotcontroller.internal;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -33,11 +33,12 @@ public class TensorFlowObjectDetection extends LinearOpMode {
      */
     private TfodProcessor tfod;
 
-    private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/CenterStage.tflite";
+    private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/mixModel.tflite";
 
     // Define the labels recognized in the model for TFOD (must be in training order!)
     private static final String[] LABELS = {
-            "Cone",
+            "redPiece",
+            "bluePiece",
     };
 
     /**

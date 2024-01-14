@@ -31,6 +31,7 @@ public class TestAuto extends LinearOpMode {
 
         waitForStart();
 
+        /**
         sleep(seconds * 1000);
 
         customHardwareHandler.moveFourWheel(0.2);
@@ -44,6 +45,13 @@ public class TestAuto extends LinearOpMode {
         customHardwareHandler.moveFourWheel(0.5);
         sleep(3900);
         customHardwareHandler.moveFourWheel(0.0);
+         **/
+
+        customHardwareHandler.rawRotation(0.5);
+        sleep(790);
+        customHardwareHandler.rawRotation(0.0);
+
+
 
 
        // customHardwareHandler.moveFourWheel(0.5);

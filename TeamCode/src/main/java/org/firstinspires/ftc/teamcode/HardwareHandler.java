@@ -163,10 +163,8 @@ public class HardwareHandler {
     public void moveWithPower(double d, double r, double s, double speed) { // d : linear movement, r : rotational movement, s : speed (0-1); r is signed with CCW as positive
         //assert (speed <= 1 && speed >= 0): "Speed must be between 0 and 1";
         if (currRunMode != DcMotor.RunMode.RUN_WITHOUT_ENCODER)
-        speed = Math.abs(speed);
+            speed = Math.abs(speed);
 
-        if (slowMode)
-            speed = speed/2;
         double total = Math.abs(d) + Math.abs(r) + Math.abs(s);
         if (d == 0 && r == 0 && s == 0) {
             leftFront.setPower(0);
@@ -191,15 +189,25 @@ public class HardwareHandler {
     }
 
     public void slowMode(double slowPercent) {
-        if (slowOn = true) {
-            slowMode = false;
-            slowOn = false;
-        }
-        if (slowOn = false) {
-            slowMode = true;
-            slowOn = true;
-        }
+        VLF = 1*slowPercent;
+        VLR = 1*slowPercent;
+        VRF = 1*slowPercent;
+        VRR = 1*slowPercent;
     }
+
+    public void normalMode()
+    {
+        VLF = 1;
+        VLR = 1;
+        VRF = 1;
+        VRR = 1;
+    }
+
+    public boolean isSlow()
+    {
+        return (VLF < 1);
+    }
+
 
 /*    public void intakeAndTransfer(double a) {
         // Check if the button is pressed
@@ -276,6 +284,10 @@ public class HardwareHandler {
 //
     public void railLauncher(double setPosition) {
         railLaunch.setPosition(setPosition);
+    }
+
+    public double getPositionRale(){
+        return railLaunch.getPosition();
     }
 //
 //    public void parallelInput(double setInput){

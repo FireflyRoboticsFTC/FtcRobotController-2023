@@ -47,7 +47,7 @@ public class BasicOpMode_IterativeMod extends OpMode {
 
         boolean aCurrState = gamepad2.a;
 
-        boolean xCurrState = gamepad2.x;
+        boolean xCurrState = gamepad1.x;
 
 
         double c = 0.65;
@@ -65,10 +65,13 @@ public class BasicOpMode_IterativeMod extends OpMode {
         boolean e = gamepad2.b;
 
         if(xCurrState && !xPrevState) {
-            if(!slowMode)
-                customHardwareHandler.slowMode(0.25);
-            else
-                customHardwareHandler.slowMode(1);
+            if(!customHardwareHandler.isSlow()) {
+                customHardwareHandler.slowMode(0.35);
+                //customHardwareHandler.slowMode(1);
+            }
+            else{
+                customHardwareHandler.normalMode();
+            }
         }
 
         if (aCurrState && !aPrevState) {
@@ -91,20 +94,23 @@ public class BasicOpMode_IterativeMod extends OpMode {
 
 
         if (gamepad2.y) {
-            customHardwareHandler.railLauncher(-0.5);
+            double val = customHardwareHandler.getPositionRale();
+            telemetry.addData("this is the thing",val);
+            //customHardwareHandler.railLauncher(-0.02);
+
         }
 
-        if (gamepad2.b) {
+        if (gamepad2.x) {
             customHardwareHandler.railLauncher(0);
         }
 
 
 
         if (gpd1bCurrState && !gpd1bPrevState) {
-            if (!doorIsOpen)
-                customHardwareHandler.doorRelease(1);
-            else
+            if (doorIsOpen)
                 customHardwareHandler.doorRelease(0);
+            else
+                customHardwareHandler.doorRelease(1);
         doorIsOpen = !(doorIsOpen);
         }
 
