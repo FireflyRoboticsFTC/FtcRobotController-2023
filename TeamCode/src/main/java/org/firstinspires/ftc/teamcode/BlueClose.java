@@ -46,18 +46,20 @@ public class BlueClose extends LinearOpMode {
          sleep(3900);
          customHardwareHandler.moveFourWheel(0.0);
          **/
+        customHardwareHandler.doorRelease(0);
         customHardwareHandler.moveFourWheel(-0.5);
-        sleep(1500);
+        sleep(1100);
         customHardwareHandler.moveFourWheel(0);
         customHardwareHandler.rawRotation(0.5);
-        sleep(770);
+        sleep(830);
         customHardwareHandler.rawRotation(0);
         customHardwareHandler.moveFourWheel(0.5);
         //sleep(1000); //little more than 1 tile
-        sleep(800);
+        sleep(1200);
         customHardwareHandler.moveFourWheel(0.0);
         customHardwareHandler.upToBoard(0.5,this,0.1);
 
+        customHardwareHandler.doorRelease(0);
 
         //customHardwareHandler.slideTest(0);
 
