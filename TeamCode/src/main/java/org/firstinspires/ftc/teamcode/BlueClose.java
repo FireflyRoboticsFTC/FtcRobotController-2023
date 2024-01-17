@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 
-@Autonomous(name = "BlueLong", group = "Autonomous")
-public class TestAuto extends LinearOpMode {
+@Autonomous(name = "BlueClose", group = "Autonomous")
+public class BlueClose extends LinearOpMode {
 
     private HardwareHandler customHardwareHandler;
 
@@ -32,36 +32,31 @@ public class TestAuto extends LinearOpMode {
         waitForStart();
 
         /**
-        sleep(seconds * 1000);
+         sleep(seconds * 1000);
 
-        customHardwareHandler.moveFourWheel(0.2);
-        sleep(500);
-        customHardwareHandler.moveFourWheel(0.0);
+         customHardwareHandler.moveFourWheel(0.2);
+         sleep(500);
+         customHardwareHandler.moveFourWheel(0.0);
 
-        customHardwareHandler.rawRotation(0.5);
-        sleep(900);
-        customHardwareHandler.rawRotation(0.0);
+         customHardwareHandler.rawRotation(0.5);
+         sleep(900);
+         customHardwareHandler.rawRotation(0.0);
 
-        customHardwareHandler.moveFourWheel(0.5);
-        sleep(3900);
-        customHardwareHandler.moveFourWheel(0.0);
+         customHardwareHandler.moveFourWheel(0.5);
+         sleep(3900);
+         customHardwareHandler.moveFourWheel(0.0);
          **/
-        customHardwareHandler.passThroughToBox(0.3);
-        sleep(3000);
-        customHardwareHandler.passThroughToBox(0);
-        customHardwareHandler.doorRelease(0);
         customHardwareHandler.moveFourWheel(-0.5);
-        sleep(1050);
+        sleep(1500);
         customHardwareHandler.moveFourWheel(0);
         customHardwareHandler.rawRotation(0.5);
-        sleep(850);
+        sleep(770);
         customHardwareHandler.rawRotation(0);
         customHardwareHandler.moveFourWheel(0.5);
         //sleep(1000); //little more than 1 tile
-        sleep(3000);
+        sleep(800);
         customHardwareHandler.moveFourWheel(0.0);
         customHardwareHandler.upToBoard(0.5,this,0.1);
-        //customHardwareHandler.doorRelease(0);
 
 
         //customHardwareHandler.slideTest(0);
@@ -69,42 +64,42 @@ public class TestAuto extends LinearOpMode {
 
 
 
-       // customHardwareHandler.moveFourWheel(0.5);
-      //  sleep(1500);
-       // customHardwareHandler.moveFourWheel(0.0);
+        // customHardwareHandler.moveFourWheel(0.5);
+        //  sleep(1500);
+        // customHardwareHandler.moveFourWheel(0.0);
 
         //customHardwareHandler.strafeFourWheel(1,true);
 
         /**
-        //IMU ROTATION TESTING
-        customHardwareHandler.rotation(90,this);
-        customHardwareHandler.rotation(-90,this);
-        customHardwareHandler.rotation(90,this);
+         //IMU ROTATION TESTING
+         customHardwareHandler.rotation(90,this);
+         customHardwareHandler.rotation(-90,this);
+         customHardwareHandler.rotation(90,this);
 
-        //customHardwareHandler.rawRotation(1);
+         //customHardwareHandler.rawRotation(1);
 
-        sleep(1000);
+         sleep(1000);
 
-        //customHardwareHandler.strafeFourWheel(0,true);
+         //customHardwareHandler.strafeFourWheel(0,true);
 
-        sleep(1000);
+         sleep(1000);
 
-        customHardwareHandler.moveFourWheel(1);
+         customHardwareHandler.moveFourWheel(1);
 
-        sleep(1000);
+         sleep(1000);
 
 
-        customHardwareHandler.moveFourWheel(0);
+         customHardwareHandler.moveFourWheel(0);
 
-        customHardwareHandler.strafeLeft(1);
+         customHardwareHandler.strafeLeft(1);
 
-        sleep(1000);
+         sleep(1000);
 
-        customHardwareHandler.strafeRight(1);
+         customHardwareHandler.strafeRight(1);
 
-        sleep(1000);
+         sleep(1000);
 
-**/
+         **/
 
 
 

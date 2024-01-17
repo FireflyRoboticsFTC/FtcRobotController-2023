@@ -238,7 +238,7 @@ public class HardwareHandler {
         boolean isButtonPressed = a; // Change "a" to the desired button
         double rightPowerModifer = 1;
         if (power > 0)
-            rightPowerModifer = 0.8;
+            rightPowerModifer = 1;
         // Check if the button state has changed
         if (isButtonPressed && !buttonPressed) {
             // Button is pressed, start the motor
@@ -378,6 +378,44 @@ public class HardwareHandler {
         }
 
     }
+
+
+    public void slideTest(double slideTestPower) {
+        linearSlideRight.setPower(slideTestPower);
+        linearSlideLeft.setPower(-slideTestPower);
+
+    }
+    public void passThroughToBox(double conveyorPower) {
+        conveyorBelt.setPower(-conveyorPower);
+    }
+    public void upToBoard(double slidePower, LinearOpMode opMode, double moveBoard) {
+        linearSlideLeft.setPower(-slidePower);
+        linearSlideRight.setPower(slidePower);
+        opMode.sleep(1500);
+
+        leftFront.setPower(moveBoard);
+        leftRear.setPower(moveBoard);
+        rightFront.setPower(moveBoard);
+        rightRear.setPower(moveBoard);
+
+
+        opMode.sleep(2900);
+        drop.setPosition(0.25);
+        opMode.sleep(1500);
+        drop.setPosition(0);
+        linearSlideLeft.setPower(slidePower*0.5);
+        linearSlideRight.setPower(-slidePower*0.5);
+        leftFront.setPower(0);
+        leftRear.setPower(0);
+        rightFront.setPower(0);
+        rightRear.setPower(0);
+        drop.setPosition(0);
+
+
+
+    }
+
+
     /**
     private double getHeading() {
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);

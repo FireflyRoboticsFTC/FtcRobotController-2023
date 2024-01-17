@@ -108,9 +108,9 @@ public class BasicOpMode_IterativeMod extends OpMode {
 
         if (gpd1bCurrState && !gpd1bPrevState) {
             if (doorIsOpen)
-                customHardwareHandler.doorRelease(0);
+                customHardwareHandler.doorRelease(0.2);
             else
-                customHardwareHandler.doorRelease(1);
+                customHardwareHandler.doorRelease(0);
         doorIsOpen = !(doorIsOpen);
         }
 
