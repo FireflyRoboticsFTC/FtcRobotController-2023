@@ -31,6 +31,16 @@ public class TestAuto extends LinearOpMode {
 
         waitForStart();
 
+
+        //SCAN
+        if (x > 1 && x < 10)
+            adasd;
+        else if(x > 1)
+            assert;
+        else
+            sad
+
+
         /**
         sleep(seconds * 1000);
 
