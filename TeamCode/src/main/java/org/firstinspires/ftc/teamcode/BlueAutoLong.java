@@ -37,14 +37,13 @@ public class BlueAutoLong extends LinearOpMode {
         customHardwareHandler.moveFourWheel(0.0);
 
         customHardwareHandler.rawRotation(-0.5);
-        sleep(790);
+        sleep(820);
         customHardwareHandler.rawRotation(0.0);
 
-        /**
+
         customHardwareHandler.moveFourWheel(0.5);
-        sleep(3900);
+        sleep(3800);
         customHardwareHandler.moveFourWheel(0.0);
-         **/
 
         // Stop the OpMode
         stop();

@@ -33,12 +33,14 @@ public class TestAuto extends LinearOpMode {
 
 
         //SCAN
+        /***
         if (x > 1 && x < 10)
             adasd;
         else if(x > 1)
             assert;
         else
             sad
+         **/
 
 
         /**

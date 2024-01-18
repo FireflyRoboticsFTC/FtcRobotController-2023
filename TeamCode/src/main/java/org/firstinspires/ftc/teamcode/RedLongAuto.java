@@ -43,14 +43,12 @@ public class RedLongAuto extends LinearOpMode {
          **/
 
         customHardwareHandler.rawRotation(0.5);
-        sleep(790);
+        sleep(870);
         customHardwareHandler.rawRotation(0.0);
 
-        /**
         customHardwareHandler.moveFourWheel(0.5);
-        sleep(3900);
+        sleep(3800);
         customHardwareHandler.moveFourWheel(0.0);
-         **/
 
         // Stop the OpMode
         stop();
