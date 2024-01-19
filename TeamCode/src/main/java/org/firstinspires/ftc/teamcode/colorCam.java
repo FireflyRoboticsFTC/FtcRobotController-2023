@@ -94,11 +94,12 @@ public class colorCam extends OpenCvPipeline {
             location = Location.NOT_FOUND;
             telemetry.addData("Beacon Location", "Not Found");
         }
-        telemetry.update();
 
         Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
 
-        return mat;
+        telemetry.update();
+
+        return input;
     }
 
     public Location getLocation() {
