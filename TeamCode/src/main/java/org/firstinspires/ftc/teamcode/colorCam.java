@@ -99,13 +99,13 @@ public class colorCam extends OpenCvPipeline {
 
         Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
 
-        Scalar color1 = new Scalar(255, 0, 0);
-        Scalar color2 = new Scalar(0, 255, 0);
-        //Scalar color3 = new Scalar(0,0,255);
+        Scalar color1 = new Scalar(255, 0, 0); //LEFT is red
+        Scalar color2 = new Scalar(0, 255, 0); //RIGHT is green
+        Scalar color3 = new Scalar(0,0,255); //MIDDLE is blue
 
-        Imgproc.rectangle(input, LEFT_ROI, location == Location.LEFT? color2:color1);
-        Imgproc.rectangle(input, RIGHT_ROI, location == Location.RIGHT? color2:color1);
-        Imgproc.rectangle(input, MIDDLE_ROI, location == Location.MIDDLE? color2:color1);
+        Imgproc.rectangle(input, LEFT_ROI, color1);
+        Imgproc.rectangle(input, RIGHT_ROI, color2);
+        Imgproc.rectangle(input, MIDDLE_ROI, color3);
 
         return input;
     }
