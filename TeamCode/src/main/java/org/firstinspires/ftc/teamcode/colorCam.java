@@ -24,14 +24,14 @@ public class colorCam extends OpenCvPipeline {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     // just makes sure these rectangles corespond with the lines where the beacon will be placed
-    static final Rect LEFT_ROI = new Rect(
+    static final Rect LEFT_ROI = new Rect( //Red
             new Point(60, 35),
             new Point(120, 75));
-    static final Rect RIGHT_ROI = new Rect(
+    static final Rect RIGHT_ROI = new Rect( //Green
             new Point(140, 35),
             new Point(200, 75));
 
-    static final Rect MIDDLE_ROI = new Rect(
+    static final Rect MIDDLE_ROI = new Rect( //Blue
             new Point(0, 0),
             new Point(0,0));
 
@@ -49,8 +49,12 @@ public class colorCam extends OpenCvPipeline {
 
         //this is where we input color we can do that tommorow
         //if you want to do it now just search up HSV values for red ranges
-        Scalar lowHSV = new Scalar(23, 50, 70);
-        Scalar highHSV = new Scalar(32, 255, 255);
+        Scalar lowHSV = new Scalar(180.7, 32, 90);
+        Scalar highHSV = new Scalar(180.7, 32, 110);
+        //H the number of color
+        //S the amoutnt of white
+        //V the amount of dark
+        //blue HSV: H180.7 S32 V99
 
         Core.inRange(mat, lowHSV, highHSV, mat);
 
@@ -103,11 +107,13 @@ public class colorCam extends OpenCvPipeline {
         Scalar color2 = new Scalar(0, 255, 0); //RIGHT is green
         Scalar color3 = new Scalar(0,0,255); //MIDDLE is blue
 
-        Imgproc.rectangle(input, LEFT_ROI, color1);
-        Imgproc.rectangle(input, RIGHT_ROI, color2);
-        Imgproc.rectangle(input, MIDDLE_ROI, color3);
+        Scalar correct = new Scalar(255,255,0);
 
-        return input;
+        Imgproc.rectangle(mat, LEFT_ROI, location == Location.LEFT? correct:color1);
+        Imgproc.rectangle(mat, RIGHT_ROI, location == Location.LEFT? correct:color2);
+        Imgproc.rectangle(mat, MIDDLE_ROI, location == Location.LEFT? correct:color3);
+
+        return mat;
     }
 
     public Location getLocation() {
