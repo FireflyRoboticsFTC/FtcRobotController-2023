@@ -3,6 +3,11 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.VisionProcessor;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -11,33 +16,22 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 
 @Autonomous(name="detector", group="Auto")
 public class detect extends LinearOpMode {
-    OpenCvCamera webcam;
+
+    private colorCam propDetection;
+
+    private VisionPortal visionPortal;
+
     @Override
     public void runOpMode() throws InterruptedException {
-        int cameraMonitorViewId = hardwareMap.appContext
-                .getResources().getIdentifier("cameraMonitorViewId",
-                        "id", hardwareMap.appContext.getPackageName());
-        webcam = OpenCvCameraFactory.getInstance()
-                .createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
-        colorCam detector = new colorCam(telemetry);
-        webcam.setPipeline(detector);
-        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
-            @Override
-            public void onOpened()
-            {
-                webcam.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);
-            }
 
-            @Override
-            public void onError(int errorCode)
-            {
+        propDetection = new colorCam(telemetry);
 
-            }
-        });
+        visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "webcam"), propDetection);
+        visionPortal.setProcessorEnabled((VisionProcessor) propDetection, true);
 
         waitForStart();
-        switch (detector.getLocation()) {
+
+        switch (propDetection.getLocation()) {
             case LEFT:
                 // ...
                 break;
@@ -50,6 +44,5 @@ public class detect extends LinearOpMode {
                 // ...
                 break;
         }
-        webcam.stopStreaming();
     }
 }
