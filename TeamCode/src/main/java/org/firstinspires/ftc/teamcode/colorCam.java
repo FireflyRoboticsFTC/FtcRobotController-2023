@@ -34,11 +34,22 @@ public class colorCam implements VisionProcessor {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     // just makes sure these rectangles corespond with the lines where the beacon will be placed
-    Rect LEFT_ROI = new Rect(0, (int) (height*3/4.0), width/4, height/4);
 
-    Rect MIDDLE_ROI = new Rect(width/4, (int) (height*3/4.0), width/2, height/4);
+    static final Rect LEFT_ROI = new Rect( //Red
+            new Point(0, 0),
+            new Point(213, 320));
+    static final Rect RIGHT_ROI = new Rect( //Green
+            new Point(427, 0),
+            new Point(640,320));
+    static final Rect MIDDLE_ROI = new Rect( //Blue
+            new Point(213, 0),
+            new Point(427, 320));
 
-    Rect RIGHT_ROI = new Rect((width/4)*3, (int) (height*3/4.0), width/4, height/4);
+    /*Rect LEFT_ROI = new Rect(0, 0, 213, 320);
+
+    Rect MIDDLE_ROI = new Rect(213, 0, 214, 320);
+
+    Rect RIGHT_ROI = new Rect(427, 0, 213, 320);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -59,14 +70,14 @@ public class colorCam implements VisionProcessor {
 
         //this is where we input color we can do that tommorow
         //if you want to do it now just search up HSV values for red ranges
-        Scalar lowHSV = new Scalar(100, 30, 110);
-        Scalar highHSV = new Scalar(111, 85, 250);
+        Scalar lowHSV = new Scalar(0, 0, 0);
+        Scalar highHSV = new Scalar(179, 255, 255);
         //H the number of color
         //S the amoutnt of white
         //V the amount of dark
         //blue HSV: H180.7 S32 V99
 
-        Core.inRange(frame, lowHSV, highHSV, mat);
+        Core.inRange(frame, lowHSV, highHSV, frame);
 
         Mat left = frame.submat(LEFT_ROI);
         Mat right = frame.submat(RIGHT_ROI);

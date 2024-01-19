@@ -21,11 +21,11 @@ public class TeamPropDetectionTuner extends OpMode {
 
     public static colorAlliance currentColor = colorAlliance.BLUE;
 
-    public static Scalar lowHSVRed = new Scalar(168,60,60);
+    public static Scalar lowHSVRed = new Scalar(120,120,120);
     public static Scalar highHSVRed = new Scalar(178,250,250);
 
-    public static Scalar lowHSVBlue = new Scalar(115,40,40);
-    public static Scalar highHSVBlue = new Scalar(125,240,240);
+    public static Scalar lowHSVBlue = new Scalar(100,30,110);
+    public static Scalar highHSVBlue = new Scalar(111,85,250);
 
     Gamepad currentGamepad;
     Gamepad previousGamepad;

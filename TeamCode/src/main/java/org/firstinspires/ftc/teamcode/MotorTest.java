@@ -8,19 +8,19 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp
 public class MotorTest extends LinearOpMode {
-    private DcMotor rightMotor;
-    private DcMotor leftMotor;
+    private DcMotor motor;
+
     //private CRServo intakeFront;
     //private CRServo intakeBack;
 
     @Override
     public void runOpMode() {
-        rightMotor = hardwareMap.dcMotor.get("rightMotor");
-        leftMotor = hardwareMap.dcMotor.get("leftMotor");
+        motor = hardwareMap.dcMotor.get("motor");
+
         //intakeFront = hardwareMap.crservo.get("intakeFront");
         //intakeBack = hardwareMap.crservo.get("intakeBack");
 
-        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
@@ -28,8 +28,7 @@ public class MotorTest extends LinearOpMode {
             double power = -gamepad1.left_stick_y;
             //double j = -gamepad1.right_stick_y;
 
-            rightMotor.setPower(power);
-            leftMotor.setPower(power);
+            motor.setPower(power);
             //intakeFront.setPower(j);
             //intakeBack.setPower(j);
         }
