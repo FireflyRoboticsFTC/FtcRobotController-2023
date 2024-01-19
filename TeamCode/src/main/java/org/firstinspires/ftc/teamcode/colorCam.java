@@ -101,7 +101,7 @@ public class colorCam extends OpenCvPipeline {
         telemetry.update();
 
 
-        Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
+       // Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
 
         Scalar color1 = new Scalar(255, 0, 0); //LEFT is red
         Scalar color2 = new Scalar(0, 255, 0); //RIGHT is green
