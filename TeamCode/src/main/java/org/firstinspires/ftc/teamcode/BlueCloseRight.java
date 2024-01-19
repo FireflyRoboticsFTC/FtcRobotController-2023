@@ -1,4 +1,3 @@
-
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -7,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 
-@Autonomous(name = "BlueClose", group = "Autonomous")
-public class BlueClose extends LinearOpMode {
+@Autonomous(name = "BlueCloseRight", group = "Autonomous")
+public class BlueCloseRight extends LinearOpMode {
 
     private HardwareHandler customHardwareHandler;
 
@@ -55,12 +54,29 @@ public class BlueClose extends LinearOpMode {
         sleep(1200);
         customHardwareHandler.moveFourWheel(0);
 
+        customHardwareHandler.rawRotation(0.5);
+        sleep(820);
+        customHardwareHandler.rawRotation(0);
+
+        customHardwareHandler.moveFourWheel(-0.5);
+        sleep(150);
+        customHardwareHandler.moveFourWheel(0);
+
         customHardwareHandler.placePixel(0.1);
         sleep(3000);
         customHardwareHandler.placePixel(0);
 
         customHardwareHandler.moveFourWheel(0.5);
+        sleep(150);
+        customHardwareHandler.moveFourWheel(0);
+
+        customHardwareHandler.rawRotation(-0.5);
+        sleep(820);
+        customHardwareHandler.rawRotation(0);
+
+        customHardwareHandler.moveFourWheel(0.5);
         sleep(1100);
+        customHardwareHandler.moveFourWheel(0);
 
         //temporarily commented to test randomization
         /*customHardwareHandler.rawRotation(0.5);

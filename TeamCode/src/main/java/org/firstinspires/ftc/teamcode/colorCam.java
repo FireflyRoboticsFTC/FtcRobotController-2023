@@ -25,15 +25,14 @@ public class colorCam extends OpenCvPipeline {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     // just makes sure these rectangles corespond with the lines where the beacon will be placed
     static final Rect LEFT_ROI = new Rect( //Red
-            new Point(60, 35),
-            new Point(120, 75));
+            new Point(290, 70),
+            new Point(390, 170));
     static final Rect RIGHT_ROI = new Rect( //Green
-            new Point(140, 35),
-            new Point(200, 75));
-
+            new Point(290, 530),
+            new Point(390, 630));
     static final Rect MIDDLE_ROI = new Rect( //Blue
-            new Point(0, 0),
-            new Point(0,0));
+            new Point(330, 300),
+            new Point(430,400));
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -49,8 +48,8 @@ public class colorCam extends OpenCvPipeline {
 
         //this is where we input color we can do that tommorow
         //if you want to do it now just search up HSV values for red ranges
-        Scalar lowHSV = new Scalar(180.7, 32, 90);
-        Scalar highHSV = new Scalar(180.7, 32, 110);
+        Scalar lowHSV = new Scalar(100, 30, 110);
+        Scalar highHSV = new Scalar(111, 85, 250);
         //H the number of color
         //S the amoutnt of white
         //V the amount of dark
@@ -101,7 +100,7 @@ public class colorCam extends OpenCvPipeline {
         telemetry.update();
 
 
-       // Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
+        Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
 
         Scalar color1 = new Scalar(255, 0, 0); //LEFT is red
         Scalar color2 = new Scalar(0, 255, 0); //RIGHT is green
