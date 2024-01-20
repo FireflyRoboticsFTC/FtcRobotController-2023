@@ -17,7 +17,6 @@ import org.openftc.easyopencv.OpenCvPipeline;
 // that dictates where the cone is
 public class colorCam implements VisionProcessor {
     Telemetry telemetry;
-    Mat mat = new Mat();
     Mat right= new Mat();
     Mat middle = new Mat();
     Mat left = new Mat();
@@ -30,8 +29,14 @@ public class colorCam implements VisionProcessor {
 
     public colorCam(Telemetry t) { telemetry = t; }
 
-    Scalar lowHSV;
-    Scalar highHSV;
+    //this is where we input color we can do that tommorow
+    //if you want to do it now just search up HSV values for red ranges
+    Scalar lowHSV = new Scalar(0, 0, 0);
+    Scalar highHSV = new Scalar(179, 255, 255);
+    //H the number of color
+    //S the amoutnt of white
+    //V the amount of dark
+    //blue HSV: H180.7 S32 V99
     int width = 640;
     int height = 480;
 
@@ -61,23 +66,14 @@ public class colorCam implements VisionProcessor {
     @Override
     public Object processFrame(Mat frame, long captureTimeNanos) {
 
-        Rect LEFT_ROI = new Rect(0, 0, width/3, height);
+        Rect LEFT_ROI = new Rect(0, 0, width/3, height - 1);
 
-        Rect MIDDLE_ROI = new Rect(width/3, 0, width/3, height);
+        Rect MIDDLE_ROI = new Rect(width/3, 0, width/3, height - 1);
 
-        Rect RIGHT_ROI = new Rect((width/3)*2, 0, width/3, height);
+        Rect RIGHT_ROI = new Rect((width/3)*2, 0, width/3, height - 1);
 
         //if the whole HSV stuff is too hard then just use RGB colors and comment all lines from 44 and use lowHSV and highHSV as rgb values
         Imgproc.cvtColor(frame, frame, Imgproc.COLOR_RGB2HSV); //
-
-        //this is where we input color we can do that tommorow
-        //if you want to do it now just search up HSV values for red ranges
-        Scalar lowHSV = new Scalar(0, 0, 0);
-        Scalar highHSV = new Scalar(179, 255, 255);
-        //H the number of color
-        //S the amoutnt of white
-        //V the amount of dark
-        //blue HSV: H180.7 S32 V99
 
         Core.inRange(frame, lowHSV, highHSV, frame);
 
@@ -139,7 +135,6 @@ public class colorCam implements VisionProcessor {
     public void onDrawFrame(Canvas canvas, int onscreenWidth, int onscreenHeight, float scaleBmpPxToCanvasPx, float scaleCanvasDensity, Object userContext) {
 
     }
-
 
     public Location getLocation() {
         return location;
