@@ -38,7 +38,7 @@ public class BlueLongScan extends LinearOpMode {
         //customHardwareHandler.rawRotation(degree) if imu dosen't work
 
         waitForStart();
-
+        double i = 3;
 
         //SCAN
         /**
@@ -71,29 +71,125 @@ public class BlueLongScan extends LinearOpMode {
 
 //        }
          **/
-        if(blueScan.getPositionX() > 490) {//Right Side
+        //if(blueScan.getPositionX() > 490) {//Right Side
+        if(i == 1) {
             customHardwareHandler.passThroughToBox(0.3);
             sleep(3000);
             customHardwareHandler.passThroughToBox(0);
             customHardwareHandler.doorRelease(0);
-            customHardwareHandler.moveFourWheel(-0.5);
-            sleep(1050);
+            customHardwareHandler.moveFourWheel(-0.45);
+            sleep(1200);
             customHardwareHandler.moveFourWheel(0);
+            customHardwareHandler.rawRotation(-0.25);
+            sleep(1000);
+            customHardwareHandler.rawRotation(0);
+            customHardwareHandler.outScan(0.5);
+            sleep(2000);
+            customHardwareHandler.outScan(0);
+            customHardwareHandler.moveFourWheel(0.3);
+            sleep(1200);
+            customHardwareHandler.moveFourWheel(0);
+            customHardwareHandler.rawRotation(0.23);
+            sleep(1000);
+
+            customHardwareHandler.moveFourWheel(0.2);
+            sleep(1500);
+            customHardwareHandler.rawRotation(0.5);
+            sleep(850);
+            customHardwareHandler.rawRotation(0);
+            customHardwareHandler.moveFourWheel(0.43);
+            //sleep(1000); //little more than 1 tile
+            sleep(3000);
+            customHardwareHandler.moveFourWheel(0.0);
+            customHardwareHandler.rawRotation(-0.45);
+            sleep(850);
+            customHardwareHandler.moveFourWheel(-0.35);
+            sleep(1050);
             customHardwareHandler.rawRotation(0.5);
             sleep(850);
             customHardwareHandler.rawRotation(0);
             customHardwareHandler.moveFourWheel(0.5);
-    //sleep(1000); //little more than 1 tile
-            sleep(3000);
-            customHardwareHandler.moveFourWheel(0.0);
-            customHardwareHandler.upToBoard(0.5, this, 0.1);
+            sleep(1000);
+            customHardwareHandler.moveFourWheel(0);
+            customHardwareHandler.upToBoard(0.5, this, 0.2);
+
         }
 
-/**
-        else //Left Side
+        //if else (middle)
+        else if(i==2){
+            customHardwareHandler.passThroughToBox(0.3);
+            sleep(3000);
+            customHardwareHandler.passThroughToBox(0);
+            customHardwareHandler.doorRelease(0);
+            customHardwareHandler.moveFourWheel(-0.55);
+            sleep(1050);
+            customHardwareHandler.moveFourWheel(0);
+            sleep(1050);
+            customHardwareHandler.moveFourWheel(0.51);
+            sleep(850);
+            customHardwareHandler.rawRotation(0.495);
+            sleep(850);
+            customHardwareHandler.rawRotation(0);
+            customHardwareHandler.moveFourWheel(0.43);
+    //sleep(1000); //little more than 1 tile
+            sleep(3100);
+            customHardwareHandler.moveFourWheel(0.0);
+            customHardwareHandler.rawRotation(-0.45);
+            sleep(850);
+            customHardwareHandler.moveFourWheel(-0.35);
+            sleep(1050);
+            customHardwareHandler.rawRotation(0.48);
+            sleep(850);
+            customHardwareHandler.rawRotation(0);
+            customHardwareHandler.upToBoard(0.5, this, 0.2);
+        }
+
+        else {
+            customHardwareHandler.passThroughToBox(0.3);
+            sleep(3000);
+            customHardwareHandler.passThroughToBox(0);
+            customHardwareHandler.doorRelease(0);
+            customHardwareHandler.moveFourWheel(-0.45);
+            sleep(1000);
+            customHardwareHandler.moveFourWheel(0);
+            customHardwareHandler.rawRotation(0.25);
+            sleep(1000);
+            customHardwareHandler.rawRotation(0);
+            customHardwareHandler.outScan(0.5);
+            sleep(2000);
+            customHardwareHandler.outScan(0);
+            customHardwareHandler.moveFourWheel(0.3);
+            sleep(100);
+            customHardwareHandler.moveFourWheel(0);
+            customHardwareHandler.rawRotation(-0.3);
+            sleep(1200);
+
+            customHardwareHandler.moveFourWheel(0.3);
+            sleep(1480);
+            customHardwareHandler.rawRotation(0.4);
+            sleep(1300);
+            customHardwareHandler.rawRotation(0);
+            customHardwareHandler.moveFourWheel(0.43);
+            //sleep(1000); //little more than 1 tile
+            sleep(3000);
+            customHardwareHandler.moveFourWheel(0.0);
+            customHardwareHandler.rawRotation(-0.45);
+            sleep(850);
+            customHardwareHandler.moveFourWheel(-0.35);
+            sleep(1050);
+            customHardwareHandler.rawRotation(0.5);
+            sleep(900);
+            customHardwareHandler.rawRotation(0);
+            customHardwareHandler.moveFourWheel(0.5);
+            sleep(800);
+            customHardwareHandler.moveFourWheel(0);
+            customHardwareHandler.upToBoard(0.5, this, 0.2);
+        }
+
+      //  else //Left Side
 
 
-*/
+
         // Stop the OpMode
         stop();
     }

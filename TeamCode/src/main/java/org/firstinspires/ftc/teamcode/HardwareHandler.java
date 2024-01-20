@@ -388,6 +388,10 @@ public class HardwareHandler {
     public void passThroughToBox(double conveyorPower) {
         conveyorBelt.setPower(-conveyorPower);
     }
+
+    public void outScan(double power) {
+        intakeFront.setPower(-power);
+    }
     public void upToBoard(double slidePower, LinearOpMode opMode, double moveBoard) {
         linearSlideLeft.setPower(-slidePower);
         linearSlideRight.setPower(slidePower);
