@@ -18,12 +18,17 @@ import org.openftc.easyopencv.OpenCvPipeline;
 public class colorCam implements VisionProcessor {
     Telemetry telemetry;
     Mat mat = new Mat();
+    Mat right= new Mat();
+    Mat middle = new Mat();
+    Mat left = new Mat();
     public enum Location {
         LEFT,
         RIGHT,
         MIDDLE,
         NOT_FOUND
     }
+
+    public colorCam(Telemetry t) { telemetry = t; }
 
     Scalar lowHSV;
     Scalar highHSV;
@@ -34,16 +39,6 @@ public class colorCam implements VisionProcessor {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     // just makes sure these rectangles corespond with the lines where the beacon will be placed
-
-    static final Rect LEFT_ROI = new Rect( //Red
-            new Point(0, 0),
-            new Point(213, 320));
-    static final Rect RIGHT_ROI = new Rect( //Green
-            new Point(427, 0),
-            new Point(640,320));
-    static final Rect MIDDLE_ROI = new Rect( //Blue
-            new Point(213, 0),
-            new Point(427, 320));
 
     /*Rect LEFT_ROI = new Rect(0, 0, 213, 320);
 
@@ -65,8 +60,15 @@ public class colorCam implements VisionProcessor {
 
     @Override
     public Object processFrame(Mat frame, long captureTimeNanos) {
+
+        Rect LEFT_ROI = new Rect(0, 0, width/3, height);
+
+        Rect MIDDLE_ROI = new Rect(width/3, 0, width/3, height);
+
+        Rect RIGHT_ROI = new Rect((width/3)*2, 0, width/3, height);
+
         //if the whole HSV stuff is too hard then just use RGB colors and comment all lines from 44 and use lowHSV and highHSV as rgb values
-        Imgproc.cvtColor(frame, mat, Imgproc.COLOR_RGB2HSV); //
+        Imgproc.cvtColor(frame, frame, Imgproc.COLOR_RGB2HSV); //
 
         //this is where we input color we can do that tommorow
         //if you want to do it now just search up HSV values for red ranges
@@ -79,17 +81,14 @@ public class colorCam implements VisionProcessor {
 
         Core.inRange(frame, lowHSV, highHSV, frame);
 
-        Mat left = frame.submat(LEFT_ROI);
-        Mat right = frame.submat(RIGHT_ROI);
-        Mat middle = frame.submat(MIDDLE_ROI);
+        left = frame.submat(LEFT_ROI);
+        right = frame.submat(RIGHT_ROI);
+        middle = frame.submat(MIDDLE_ROI);
 
-        double leftValue = Core.sumElems(left).val[0] / LEFT_ROI.area() / 255;
-        double middleValue = Core.sumElems(middle).val[0] / MIDDLE_ROI.area() / 255;
-        double rightValue = Core.sumElems(right).val[0] / RIGHT_ROI.area() / 255;
+        double leftValue = Core.mean(left).val[0] / 255;
+        double middleValue = Core.mean(middle).val[0] / 255;
+        double rightValue = Core.mean(right).val[0] / 255;
 
-        left.release();
-        right.release();
-        middle.release();
 
         telemetry.addData("Left raw value", (int) Core.sumElems(left).val[0]);
         telemetry.addData("Middle raw value", (int) Core.sumElems(middle).val[0]);
@@ -130,8 +129,8 @@ public class colorCam implements VisionProcessor {
         Scalar correct = new Scalar(255,255,0);
 
         Imgproc.rectangle(frame, LEFT_ROI, location == Location.LEFT? correct:color1);
-        Imgproc.rectangle(frame, RIGHT_ROI, location == Location.LEFT? correct:color2);
-        Imgproc.rectangle(frame, MIDDLE_ROI, location == Location.LEFT? correct:color3);
+        Imgproc.rectangle(frame, RIGHT_ROI, location == Location.RIGHT? correct:color2);
+        Imgproc.rectangle(frame, MIDDLE_ROI, location == Location.MIDDLE? correct:color3);
 
         return null;
     }
@@ -140,7 +139,6 @@ public class colorCam implements VisionProcessor {
     public void onDrawFrame(Canvas canvas, int onscreenWidth, int onscreenHeight, float scaleBmpPxToCanvasPx, float scaleCanvasDensity, Object userContext) {
 
     }
-    public colorCam(Telemetry t) { telemetry = t; }
 
 
     public Location getLocation() {

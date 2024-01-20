@@ -31,18 +31,20 @@ public class detect extends LinearOpMode {
 
         waitForStart();
 
-        switch (propDetection.getLocation()) {
-            case LEFT:
-                // ...
-                break;
-            case RIGHT:
-                // ...
-                break;
-            case MIDDLE:
-                break;
-            case NOT_FOUND:
-                // ...
-                break;
+        while (opModeIsActive()) {
+            switch (propDetection.getLocation()) {
+                case LEFT:
+                    // ...
+                    break;
+                case RIGHT:
+                    // ...
+                    break;
+                case MIDDLE:
+                    break;
+                case NOT_FOUND:
+                    // ...
+                    break;
+            }
         }
     }
 }
