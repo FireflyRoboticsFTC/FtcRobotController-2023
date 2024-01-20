@@ -61,19 +61,26 @@ public class colorCam implements VisionProcessor {
     @Override
     public Object processFrame(Mat frame, long captureTimeNanos) {
 
-        Rect LEFT_ROI = new Rect(0, 0, width/3, height);
+        Rect LEFT_ROI = new Rect(0, 0, width/4, height/3*2);
 
-        Rect MIDDLE_ROI = new Rect(width/3, 0, width/3, height);
+        Rect MIDDLE_ROI = new Rect(width/4, 0, width*5/12, height/3*2);
 
-        Rect RIGHT_ROI = new Rect((width/3)*2, 0, width/3, height);
+        Rect RIGHT_ROI = new Rect((width/3)*2, 0, width/3, height/3*2);
 
         //if the whole HSV stuff is too hard then just use RGB colors and comment all lines from 44 and use lowHSV and highHSV as rgb values
         Imgproc.cvtColor(frame, frame, Imgproc.COLOR_RGB2HSV); //
 
         //this is where we input color we can do that tommorow
         //if you want to do it now just search up HSV values for red ranges
-        Scalar lowHSV = new Scalar(0, 0, 0);
-        Scalar highHSV = new Scalar(179, 255, 255);
+
+        //red
+        Scalar lowHSV = new Scalar(120, 120, 120);
+        Scalar highHSV = new Scalar(178, 250, 250);
+
+        //blue
+        //Scalar lowHSV = new Scalar(100, 30, 110);
+        //Scalar highHSV = new Scalar(111, 85, 250);
+
         //H the number of color
         //S the amoutnt of white
         //V the amount of dark
@@ -85,9 +92,9 @@ public class colorCam implements VisionProcessor {
         right = frame.submat(RIGHT_ROI);
         middle = frame.submat(MIDDLE_ROI);
 
-        double leftValue = Core.mean(left).val[0] / 255;
-        double middleValue = Core.mean(middle).val[0] / 255;
-        double rightValue = Core.mean(right).val[0] / 255;
+        double leftValue = Core.mean(left).val[0];
+        double middleValue = Core.mean(middle).val[0];
+        double rightValue = Core.mean(right).val[0];
 
 
         telemetry.addData("Left raw value", (int) Core.sumElems(left).val[0]);
