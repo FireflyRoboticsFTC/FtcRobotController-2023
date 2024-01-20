@@ -24,7 +24,7 @@ public class detect extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        propDetection = new colorCam(telemetry);
+        propDetection = new colorCam(telemetry, "blue");
 
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "webcam"), propDetection);
         visionPortal.setProcessorEnabled((VisionProcessor) propDetection, true);

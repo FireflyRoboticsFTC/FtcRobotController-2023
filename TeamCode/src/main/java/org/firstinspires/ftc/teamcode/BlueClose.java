@@ -47,17 +47,17 @@ public class BlueClose extends LinearOpMode {
          customHardwareHandler.moveFourWheel(0.0);
          **/
         customHardwareHandler.doorRelease(0);
-        customHardwareHandler.placePixel(-0.3);
+       // customHardwareHandler.placePixel(-0.3);
         sleep(1500);
-        customHardwareHandler.placePixel(0);
+        //customHardwareHandler.placePixel(0);
 
         customHardwareHandler.moveFourWheel(-0.5);
         sleep(1200);
         customHardwareHandler.moveFourWheel(0);
 
-        customHardwareHandler.placePixel(0.1);
+        //customHardwareHandler.placePixel(0.1);
         sleep(3000);
-        customHardwareHandler.placePixel(0);
+        //customHardwareHandler.placePixel(0);
 
         customHardwareHandler.moveFourWheel(0.5);
         sleep(1100);

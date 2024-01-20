@@ -10,8 +10,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.VisionProcessor;
 
-@Autonomous(name = "BlueLongScan", group = "Autonomous")
-public class BlueLongScan extends LinearOpMode {
+@Autonomous(name = "RedLongScan", group = "Autonomous")
+public class RedLongScan extends LinearOpMode {
 
     private HardwareHandler customHardwareHandler;
     private TensorFlowObjectDetection blueScan;
@@ -36,7 +36,7 @@ public class BlueLongScan extends LinearOpMode {
         customHardwareHandler = new HardwareHandler(hardwareMap, new Position(), telemetry);
         blueScan = new TensorFlowObjectDetection();
 
-        propDetection = new colorCam(telemetry, "blue");
+        propDetection = new colorCam(telemetry, "red");
 
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "webcam"), propDetection);
         visionPortal.setProcessorEnabled((VisionProcessor) propDetection, true);
@@ -47,7 +47,6 @@ public class BlueLongScan extends LinearOpMode {
         //customHardwareHandler.rawRotation(degree) if imu dosen't work
 
         waitForStart();
-        //double i = 3;
 
         switch (propDetection.getLocation()) {
             case LEFT:
@@ -212,3 +211,4 @@ public class BlueLongScan extends LinearOpMode {
         stop();
     }
 }
+

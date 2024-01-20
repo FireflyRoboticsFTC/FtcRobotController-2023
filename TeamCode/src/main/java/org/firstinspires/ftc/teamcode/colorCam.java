@@ -21,6 +21,7 @@ public class colorCam implements VisionProcessor {
     Mat right= new Mat();
     Mat middle = new Mat();
     Mat left = new Mat();
+    String color;
     public enum Location {
         LEFT,
         RIGHT,
@@ -28,7 +29,7 @@ public class colorCam implements VisionProcessor {
         NOT_FOUND
     }
 
-    public colorCam(Telemetry t) { telemetry = t; }
+    public colorCam(Telemetry t, String c) { telemetry = t; color = c;}
 
     Scalar lowHSV;
     Scalar highHSV;
@@ -74,8 +75,13 @@ public class colorCam implements VisionProcessor {
         //if you want to do it now just search up HSV values for red ranges
 
         //red
-        Scalar lowHSV = new Scalar(120, 120, 120);
-        Scalar highHSV = new Scalar(178, 250, 250);
+        if (color.equals("red")) {
+            lowHSV = new Scalar(170, 175, 120);
+            highHSV = new Scalar(178, 220, 187);
+        } else { //blue
+            lowHSV = new Scalar(75, 5, 120);
+            highHSV = new Scalar(106, 125, 190);
+        }
 
         //blue
         //Scalar lowHSV = new Scalar(100, 30, 110);
@@ -92,9 +98,9 @@ public class colorCam implements VisionProcessor {
         right = frame.submat(RIGHT_ROI);
         middle = frame.submat(MIDDLE_ROI);
 
-        double leftValue = Core.mean(left).val[0];
-        double middleValue = Core.mean(middle).val[0];
-        double rightValue = Core.mean(right).val[0];
+        double leftValue = Core.mean(left).val[0] / 6;
+        double middleValue = Core.mean(middle).val[0] / 6;
+        double rightValue = Core.mean(right).val[0] / 6;
 
 
         telemetry.addData("Left raw value", (int) Core.sumElems(left).val[0]);

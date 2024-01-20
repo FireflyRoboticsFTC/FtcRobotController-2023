@@ -59,8 +59,8 @@ public class HardwareHandler {
     public static double KLF = 1, KLR = 0.95, KRF = 0.9, KRR = 0.855; //KLF = 1, KLR = 0.944, KRF = 0.934825, KRR = 0.8824748;
     private final DcMotor linearSlideRight;
     private final DcMotor linearSlideLeft;
- //   private final DcMotor actuatorLeft;
- //   private final DcMotor actuatorRight;
+    //   private final DcMotor actuatorLeft;
+    //   private final DcMotor actuatorRight;
 
     // Define your servo variables
     private final Servo railLaunch;
@@ -389,7 +389,9 @@ public class HardwareHandler {
         conveyorBelt.setPower(-conveyorPower);
     }
 
-    public void placePixel(double intakePower) {intakeFront.setPower(-intakePower); }
+    public void outScan(double power) {
+        intakeFront.setPower(-power);
+    }
     public void upToBoard(double slidePower, LinearOpMode opMode, double moveBoard) {
         linearSlideLeft.setPower(-slidePower);
         linearSlideRight.setPower(slidePower);
@@ -419,10 +421,10 @@ public class HardwareHandler {
 
 
     /**
-    private double getHeading() {
-        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-        return angles.firstAngle;
-    }
+     private double getHeading() {
+     angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+     return angles.firstAngle;
+     }
      **/
 
 
@@ -434,66 +436,61 @@ public class HardwareHandler {
         rightRear.setPower(-power);
     }
 /**
-    //IMU ROTATION (MAYBE WORKS?)
-    public void rotation(double degrees, LinearOpMode opMode) {
-        double currentHeading;
-        double initialHeading = 0;
+ //IMU ROTATION (MAYBE WORKS?)
+ public void rotation(double degrees, LinearOpMode opMode) {
+ double currentHeading;
+ double initialHeading = 0;
 
 
-        while (opMode.opModeIsActive()) {
+ while (opMode.opModeIsActive()) {
 
-            currentHeading = getHeading();
+ currentHeading = getHeading();
 
-            double error = degrees - (currentHeading - initialHeading);
+ double error = degrees - (currentHeading - initialHeading);
 
-            double rotationPower = error * 0.01; //error constant
-
-
-            leftFront.setPower(rotationPower);
-            leftRear.setPower(rotationPower);
-            rightFront.setPower(-rotationPower);
-            rightRear.setPower(-rotationPower);
+ double rotationPower = error * 0.01; //error constant
 
 
-            if (Math.abs(error) < 1.0) {
-                break;
-            }
+ leftFront.setPower(rotationPower);
+ leftRear.setPower(rotationPower);
+ rightFront.setPower(-rotationPower);
+ rightRear.setPower(-rotationPower);
 
-            opMode.telemetry.addData("Current Heading", currentHeading);
-            opMode.telemetry.addData("Error", error);
-            opMode.telemetry.update();
 
-            opMode.idle();
+ if (Math.abs(error) < 1.0) {
+ break;
+ }
 
-        }
+ opMode.telemetry.addData("Current Heading", currentHeading);
+ opMode.telemetry.addData("Error", error);
+ opMode.telemetry.update();
 
-    }
-    public void strafeLeft(double power) {
-        double heading = getHeading();
-        double correction = heading * kP;
+ opMode.idle();
 
-        // Adjust motor powers for strafing left
-        leftFront.setPower(-power + correction);
-        leftRear.setPower(power + correction);
-        rightFront.setPower(power - correction);
-        rightRear.setPower(-power - correction);
-    }
+ }
 
-    public void strafeRight(double power) {
-        double heading = getHeading();
-        double correction = heading * kP;
+ }
+ public void strafeLeft(double power) {
+ double heading = getHeading();
+ double correction = heading * kP;
 
-        // Adjust motor powers for strafing left
-        leftFront.setPower(power + correction);
-        leftRear.setPower(-power + correction);
-        rightFront.setPower(-power - correction);
-        rightRear.setPower(power - correction);
-    }
+ // Adjust motor powers for strafing left
+ leftFront.setPower(-power + correction);
+ leftRear.setPower(power + correction);
+ rightFront.setPower(power - correction);
+ rightRear.setPower(-power - correction);
+ }
+
+ public void strafeRight(double power) {
+ double heading = getHeading();
+ double correction = heading * kP;
+
+ // Adjust motor powers for strafing left
+ leftFront.setPower(power + correction);
+ leftRear.setPower(-power + correction);
+ rightFront.setPower(-power - correction);
+ rightRear.setPower(power - correction);
+ }
  **/
 
 }
-
-
-
-
-
