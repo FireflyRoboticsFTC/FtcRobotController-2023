@@ -20,6 +20,8 @@ public class BasicOpMode_IterativeMod extends OpMode {
 
     private boolean slowMode = false;
 
+    private boolean armDown = false;
+
     private boolean gpd2bPrevState = false;
 
     private boolean gpd1bPrevState = false;
@@ -27,6 +29,8 @@ public class BasicOpMode_IterativeMod extends OpMode {
     private boolean aPrevState = false;
 
     private boolean xPrevState = false;
+
+    private boolean yPrevState = false;
 
     Gamepad gamePad1;
     @Override
@@ -48,6 +52,8 @@ public class BasicOpMode_IterativeMod extends OpMode {
         boolean aCurrState = gamepad2.a;
 
         boolean xCurrState = gamepad1.x;
+
+        boolean yCurrState = gamepad1.y;
 
 
         double c = 0.65;
@@ -82,6 +88,8 @@ public class BasicOpMode_IterativeMod extends OpMode {
             intakeIn = !(intakeIn);
         }
 
+
+
         if (gpd2bCurrState && !gpd2bPrevState) {
             if (!intakeOut)
                 customHardwareHandler.intakeAndTransfer(-1);
@@ -89,6 +97,14 @@ public class BasicOpMode_IterativeMod extends OpMode {
                 customHardwareHandler.intakeAndTransfer(0);
             intakeOut = !(intakeOut);
 
+        }
+
+        if(yCurrState && !yPrevState) {
+            if(!armDown)
+                customHardwareHandler.armServo(0);
+            else
+                customHardwareHandler.armServo(1);
+            armDown = !(armDown);
         }
 
 
@@ -100,7 +116,7 @@ public class BasicOpMode_IterativeMod extends OpMode {
 
         }
 
-        if (gamepad2.x) {
+        if (gamepad1.dpad_up) {
             customHardwareHandler.railLauncher(0);
         }
 
@@ -118,6 +134,7 @@ public class BasicOpMode_IterativeMod extends OpMode {
     gpd1bPrevState = gpd1bCurrState;
     aPrevState = aCurrState;
     xPrevState = xCurrState;
+    yPrevState = yCurrState;
 
 
 

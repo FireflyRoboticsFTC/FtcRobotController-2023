@@ -10,8 +10,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.VisionProcessor;
 
-@Autonomous(name = "BlueLongScan", group = "Autonomous")
-public class BlueLongScan extends LinearOpMode {
+@Autonomous(name = "!BlueShortScanCOMP", group = "Autonomous")
+public class BlueShortScan extends LinearOpMode {
 
     private HardwareHandler customHardwareHandler;
     private TensorFlowObjectDetection blueScan;
@@ -55,41 +55,47 @@ public class BlueLongScan extends LinearOpMode {
                 sleep(3000);
                 customHardwareHandler.passThroughToBox(0);
                 customHardwareHandler.doorRelease(0);
-                customHardwareHandler.moveFourWheel(-0.45);
-                sleep(1100);
+                customHardwareHandler.moveFourWheel(-0.3);
+                sleep(700);
                 customHardwareHandler.moveFourWheel(0);
-                customHardwareHandler.rawRotation(-0.25);
-                sleep(1000);
-                customHardwareHandler.rawRotation(0);
-                customHardwareHandler.outScan(0.5);
-                sleep(2000);
-                customHardwareHandler.outScan(0);
-                customHardwareHandler.moveFourWheel(0.3);
-                sleep(1250);
-                customHardwareHandler.moveFourWheel(0);
-                customHardwareHandler.rawRotation(0.23);
-                sleep(1000);
 
-                customHardwareHandler.moveFourWheel(0.2);
-                sleep(1500);
-                customHardwareHandler.rawRotation(0.5);
-                sleep(750);
-                customHardwareHandler.rawRotation(0);
-                customHardwareHandler.moveFourWheel(0.43);
-                //sleep(1000); //little more than 1 tile
-                sleep(3000);
-                customHardwareHandler.moveFourWheel(0.0);
-                customHardwareHandler.rawRotation(-0.45);
-                sleep(850);
-                customHardwareHandler.moveFourWheel(-0.35);
-                sleep(1050);
                 customHardwareHandler.rawRotation(0.5);
                 sleep(850);
                 customHardwareHandler.rawRotation(0);
                 customHardwareHandler.moveFourWheel(0.5);
-                sleep(1000);
+                sleep(800);
                 customHardwareHandler.moveFourWheel(0);
-                customHardwareHandler.upToBoard(0.5, this, 0.2);
+                customHardwareHandler.rawRotation(0.5);
+                //customHardwareHandler.rawRotation(1);
+                sleep(750);
+                customHardwareHandler.rawRotation(0);
+                customHardwareHandler.moveFourWheel(0.5);
+                sleep(600);
+                customHardwareHandler.moveFourWheel(0);
+                customHardwareHandler.rawRotation(-0.5);
+                sleep(850);
+                customHardwareHandler.rawRotation(0);
+                customHardwareHandler.moveFourWheel(-0.5);
+                sleep(200);
+                customHardwareHandler.moveFourWheel(0);
+                customHardwareHandler.outScan(0.5);
+                sleep(2000);
+                customHardwareHandler.outScan(0);
+                customHardwareHandler.moveFourWheel(0.5);
+                sleep(600);
+                customHardwareHandler.moveFourWheel(0);
+                customHardwareHandler.upToBoard(0.25,this,0.2);
+                customHardwareHandler.moveFourWheel(-0.5);
+                sleep(200);
+                customHardwareHandler.moveFourWheel(0);
+                customHardwareHandler.rawRotation(0.4);
+                sleep(1000);
+                customHardwareHandler.rawRotation(0);
+                customHardwareHandler.moveFourWheel(0.5);
+                sleep(800);
+                customHardwareHandler.moveFourWheel(0);
+
+
                 break;
             case RIGHT:
                 customHardwareHandler.passThroughToBox(0.3);
@@ -97,69 +103,70 @@ public class BlueLongScan extends LinearOpMode {
                 customHardwareHandler.passThroughToBox(0);
                 customHardwareHandler.doorRelease(0);
                 customHardwareHandler.moveFourWheel(-0.45);
-                sleep(1000);
+                sleep(1200);
                 customHardwareHandler.moveFourWheel(0);
-                customHardwareHandler.rawRotation(0.25);
-                sleep(1000);
+                customHardwareHandler.rawRotation(0.4);
+                sleep(800);
                 customHardwareHandler.rawRotation(0);
-                customHardwareHandler.outScan(0.5);
+                customHardwareHandler.outScan(0.7);
                 sleep(2000);
                 customHardwareHandler.outScan(0);
-                customHardwareHandler.moveFourWheel(0.3);
-                sleep(100);
-                customHardwareHandler.moveFourWheel(0);
-                customHardwareHandler.rawRotation(-0.3);
-                sleep(1200);
-
-                customHardwareHandler.moveFourWheel(0.3);
-                sleep(1450);
-                customHardwareHandler.rawRotation(0.4);
-                sleep(1150);
+                customHardwareHandler.rawRotation(0.15);
+                sleep(1000);
                 customHardwareHandler.rawRotation(0);
-                customHardwareHandler.moveFourWheel(0.43);
-                //sleep(1000); //little more than 1 tile
-                sleep(3000);
-                customHardwareHandler.moveFourWheel(0.0);
-                customHardwareHandler.rawRotation(-0.45);
-                sleep(850);
-                customHardwareHandler.moveFourWheel(-0.35);
-                sleep(1050);
-                customHardwareHandler.rawRotation(0.5);
-                sleep(900);
+                customHardwareHandler.moveFourWheel(0.4);
+                sleep(1000);
+                customHardwareHandler.upToBoard(0.35,this,0.2);
+                customHardwareHandler.moveFourWheel(-0.5);
+                sleep(200);
+                customHardwareHandler.moveFourWheel(0);
+                customHardwareHandler.rawRotation(0.4);
+                sleep(1000);
                 customHardwareHandler.rawRotation(0);
                 customHardwareHandler.moveFourWheel(0.5);
-                sleep(800);
+                sleep(900);
                 customHardwareHandler.moveFourWheel(0);
-                customHardwareHandler.upToBoard(0.5, this, 0.2);
                 break;
+
+
             case MIDDLE:
                 customHardwareHandler.passThroughToBox(0.3);
                 sleep(3000);
                 customHardwareHandler.passThroughToBox(0);
                 customHardwareHandler.doorRelease(0);
-                customHardwareHandler.moveFourWheel(-0.5);
-                sleep(1050);
+                customHardwareHandler.moveFourWheel(-0.55);
+                sleep(900);
                 customHardwareHandler.moveFourWheel(0);
                 customHardwareHandler.outScan(0.5);
-                sleep(1050);
+                sleep(2000);
                 customHardwareHandler.outScan(0);
-                customHardwareHandler.moveFourWheel(0.51);
-                sleep(850);
+                customHardwareHandler.moveFourWheel(0.5);
+                sleep(600);
                 customHardwareHandler.rawRotation(0.495);
-                sleep(750);
+                sleep(850);
                 customHardwareHandler.rawRotation(0);
                 customHardwareHandler.moveFourWheel(0.43);
                 //sleep(1000); //little more than 1 tile
-                sleep(3100);
+                sleep(1000);
                 customHardwareHandler.moveFourWheel(0.0);
                 customHardwareHandler.rawRotation(-0.45);
                 sleep(850);
                 customHardwareHandler.moveFourWheel(-0.35);
-                sleep(1050);
+                sleep(700);
                 customHardwareHandler.rawRotation(0.48);
-                sleep(850);
+                sleep(700);
                 customHardwareHandler.rawRotation(0);
-                customHardwareHandler.upToBoard(0.4, this, 0.19);
+                customHardwareHandler.upToBoard(0.35, this, 0.2);
+                customHardwareHandler.moveFourWheel(-0.5);
+                sleep(200);
+                customHardwareHandler.moveFourWheel(0);
+                customHardwareHandler.rawRotation(0.4);
+                sleep(1000);
+                customHardwareHandler.rawRotation(0);
+                customHardwareHandler.moveFourWheel(0.5);
+                sleep(800);
+                customHardwareHandler.moveFourWheel(0);
+
                 break;
             case NOT_FOUND:
                 customHardwareHandler.passThroughToBox(0.3);

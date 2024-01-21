@@ -1,9 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.bosch.BHI260IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -14,9 +12,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.teamcode.movement.imu.SimpsonIntegrator;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 
 import java.util.HashMap;
@@ -91,6 +86,7 @@ public class HardwareHandler {
 
     private double frontRightPower;
 
+    private final Servo danielSucks;
 
     // Constructor
     public HardwareHandler(HardwareMap hardwareMap, Position currPos, Telemetry telemetry) {
@@ -103,6 +99,7 @@ public class HardwareHandler {
         conveyorBelt = hardwareMap.dcMotor.get("conveyorBelt");
         linearSlideRight = hardwareMap.dcMotor.get("linearSlideRight");
         linearSlideLeft = hardwareMap.dcMotor.get("linearSlideLeft");
+
 //        actuatorLeft = hardwareMap.dcMotor.get("actuatorLeft");
 //        actuatorRight = hardwareMap.dcMotor.get("actuatorRight");
 
@@ -111,6 +108,7 @@ public class HardwareHandler {
         railLaunch = hardwareMap.servo.get("railLaunch");
         drop = hardwareMap.servo.get("BAM");
         outputDoor = hardwareMap.servo.get("outputDoor");
+        danielSucks = hardwareMap.servo.get("arm");
 
 //        intake = hardwareMap.servo.get("intake");
 
@@ -348,7 +346,7 @@ public class HardwareHandler {
 
     public void intakeAndTransfer(int i) {
         intakeFront.setPower(i);
-        conveyorBelt.setPower(-i);
+        conveyorBelt.setPower(-i*0.5);
     }
 
     public void doorRelease(double release) {
@@ -407,16 +405,23 @@ public class HardwareHandler {
         drop.setPosition(0.25);
         opMode.sleep(1500);
         drop.setPosition(0);
-        linearSlideLeft.setPower(slidePower*0.5);
-        linearSlideRight.setPower(-slidePower*0.5);
+        linearSlideLeft.setPower(slidePower*0.8);
+        linearSlideRight.setPower(-slidePower*0.8);
         leftFront.setPower(0);
         leftRear.setPower(0);
         rightFront.setPower(0);
         rightRear.setPower(0);
         drop.setPosition(0);
+        opMode.sleep(1500);
+        linearSlideRight.setPower(0);
+        linearSlideLeft.setPower(0);
 
 
 
+    }
+
+    public void armServo(double position){
+        danielSucks.setPosition(position);
     }
 
 
